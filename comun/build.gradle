@@ -26,7 +26,8 @@ allprojects {
 	project.ext.springbootjasypt = ['com.github.ulisesbocchio:jasypt-spring-boot-starter:2.1.1']
 	
 	project.ext.junit = ["junit:junit:4.12"]
-	project.ext.mockito = ['org.mockito:mockito-all:1.10.19']
+	//project.ext.mockito = ['org.mockito:mockito-all:1.10.19']
+	project.ext.mockito = ['org.mockito:mockito-core:3.11.2']
 	project.ext.h2 = ["com.h2database:h2:1.4.194"]
 	project.ext.actuator=["org.springframework.boot:spring-boot-starter-actuator:2.1.6.RELEASE"]
 	
