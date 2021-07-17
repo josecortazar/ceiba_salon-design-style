@@ -48,10 +48,13 @@ pipeline {
 
 	stage('Compile & Unit Tests') {
 		steps{
-			sh './comun/gradlew clean'
+			//sh './comun/gradlew clean'
+			sh 'gradle --b ./microservicio/build.gradle clean'
 			echo "------------>compile & Unit Tests<------------"
-			sh 'chmod +x comun/gradlew'
-			sh './comun/gradlew --b ./microservicio/build.gradle test'
+			//sh 'chmod +x comun/gradlew'
+			//sh './comun/gradlew --b ./microservicio/build.gradle test'
+			sh 'gradle --b ./microservicio/build.gradle compileJava'
+			sh 'gradle --b ./microservicio/build.gradle test'
 		}
 	}
 
@@ -69,7 +72,8 @@ pipeline {
 		steps{
 			echo "------------>Build<------------"
 			//Construir sin tarea test que se ejecutó previamente
-			sh './comun/gradlew --b ./microservicio/build.gradle build -x test'
+			//sh './comun/gradlew --b ./microservicio/build.gradle build -x test'
+			sh 'gradle --b ./microservicio/build.gradle build -x test'
 		}
 	}
  
