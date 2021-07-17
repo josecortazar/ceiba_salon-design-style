@@ -4,10 +4,6 @@ pipeline {
     label 'Slave_Induccion'
   }
   
-environment {
-        PROJECT_PATH_BACK = './microservicio/'
-  }
-
   //Opciones específicas de Pipeline dentro del Pipeline
   options {
     	buildDiscarder(logRotator(numToKeepStr: '3'))
@@ -51,10 +47,10 @@ environment {
 
 	stage('Compile & Unit Tests') {
 		steps{
-			sh 'chmod +x ./gradlew'
-			sh './gradlew clean'
+			sh 'chmod +x ./microservicio/gradlew'
+			sh './microservicio/gradlew clean'
 			echo "------------>compile & Unit Tests<------------"
-			sh './gradlew --b ./build.gradle test'
+			sh './microservicio/gradlew --b ./microservicio/build.gradle test'
 		}
 	}
 
@@ -72,7 +68,7 @@ environment {
 		steps{
 			echo "------------>Build<------------"
 			//Construir sin tarea test que se ejecutó previamente
-			sh './gradlew --b ./build.gradle build -x test'
+			sh './microservicio/gradlew --b ./build.gradle build -x test'
 		}
 	}
  
