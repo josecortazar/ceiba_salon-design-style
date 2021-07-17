@@ -51,7 +51,7 @@ environment {
 
 	stage('Compile & Unit Tests') {
 		steps{
-			sh 'chmod +x gradlew'
+			sh 'chmod +x ./gradlew'
 			sh './gradlew clean'
 			echo "------------>compile & Unit Tests<------------"
 			sh './gradlew --b ./build.gradle test'
