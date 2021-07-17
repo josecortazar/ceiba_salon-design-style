@@ -49,7 +49,7 @@ pipeline {
     stage('Compile & Unit Tests') {
 		steps{
 			echo "------------>Compile & Unit Tests<------------"
-			
+			sh 'gradle --b ./microservicio/build.gradle clean'
 			sh 'gradle --b ./microservicio/build.gradle test'
       }
     }
