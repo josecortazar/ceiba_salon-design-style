@@ -6,13 +6,17 @@ pipeline {
   
   //Opciones específicas de Pipeline dentro del Pipeline
   options {
-    	buildDiscarder(logRotator(numToKeepStr: '3'))
+    buildDiscarder(logRotator(numToKeepStr: '3'))
  	disableConcurrentBuilds()
+  }
+  environment {
+    PROJECT_PATH_BACK = './microservicio/'
   }
 
   //Una sección que define las herramientas “preinstaladas” en Jenkins
   tools {
     jdk 'JDK11_Centos' //Versión preinstalada en la Configuración del Master
+	gradle 'Gradle5.6_Centos' //Preinstalada en la Configuración del Master
   }
 /*	Versiones disponibles
       JDK8_Mac
@@ -45,14 +49,13 @@ pipeline {
    		}
 	}
 
-	stage('Compile & Unit Tests') {
+    stage('Compile & Unit Tests') {
 		steps{
-			sh 'chmod +x ./microservicio/gradlew'
-			//sh './microservicio/gradlew clean'
-			echo "------------>compile & Unit Tests<------------"
-			sh './microservicio/gradlew --b ./microservicio/build.gradle test'
-		}
-	}
+			echo "------------>Compile & Unit Tests<------------"
+			
+			sh 'gradle --b ./build.gradle test'
+      }
+    }
 
     stage('Static Code Analysis') {
 			steps{
@@ -68,7 +71,7 @@ pipeline {
 		steps{
 			echo "------------>Build<------------"
 			//Construir sin tarea test que se ejecutó previamente
-			sh './microservicio/gradlew --b ./build.gradle build -x test'
+			sh 'gradle --b ./build.gradle build -x test'
 		}
 	}
  
@@ -81,7 +84,7 @@ pipeline {
     }
     success {
    	 	echo 'This will run only if successful'
-		junit 'microservicio/build/test-results/test/*.xml' //RUTA DE TUS ARCHIVOS .XML
+		junit 'build/test-results/test/*.xml' //RUTA DE TUS ARCHIVOS .XML
 
     }
 
