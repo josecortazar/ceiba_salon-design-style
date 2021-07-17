@@ -1,8 +1,10 @@
-
 pipeline {
   //Donde se va a ejecutar el Pipeline
   agent {
     label 'Slave_Induccion'
+  }
+environment {
+        PROJECT_PATH_BACK = './microservicio/'
   }
 
   //Opciones específicas de Pipeline dentro del Pipeline
@@ -48,10 +50,11 @@ pipeline {
 
 	stage('Compile & Unit Tests') {
 		steps{
-			sh 'chmod +x microservicio/gradlew'
+			'./gradlew clean'
 			//sh './microservicio/gradlew clean'
 			echo "------------>compile & Unit Tests<------------"
-			sh './microservicio/gradlew --b ./microservicio/build.gradle test'
+			sh 'chmod +x gradlew'
+			sh './gradlew --b ./build.gradle test'
 		}
 	}
 
@@ -69,7 +72,7 @@ pipeline {
 		steps{
 			echo "------------>Build<------------"
 			//Construir sin tarea test que se ejecutó previamente
-			sh './microservicio/gradlew --b ./microservicio/build.gradle build -x test'
+			sh './gradlew --b ./build.gradle build -x test'
 		}
 	}
  
