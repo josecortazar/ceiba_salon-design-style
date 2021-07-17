@@ -9,9 +9,6 @@ pipeline {
     buildDiscarder(logRotator(numToKeepStr: '3'))
  	disableConcurrentBuilds()
   }
-  environment {
-    PROJECT_PATH_BACK = './microservicio/'
-  }
 
   //Una sección que define las herramientas “preinstaladas” en Jenkins
   tools {
@@ -53,7 +50,7 @@ pipeline {
 		steps{
 			echo "------------>Compile & Unit Tests<------------"
 			
-			sh 'gradle --b ./build.gradle test'
+			sh 'gradle --b ./microservicio/build.gradle test'
       }
     }
 
@@ -71,7 +68,7 @@ pipeline {
 		steps{
 			echo "------------>Build<------------"
 			//Construir sin tarea test que se ejecutó previamente
-			sh 'gradle --b ./build.gradle build -x test'
+			sh 'gradle --b ./microservicio/build.gradle build -x test'
 		}
 	}
  
@@ -84,7 +81,7 @@ pipeline {
     }
     success {
    	 	echo 'This will run only if successful'
-		junit 'build/test-results/test/*.xml' //RUTA DE TUS ARCHIVOS .XML
+		junit 'microservicio/build/test-results/test/*.xml' //RUTA DE TUS ARCHIVOS .XML
 
     }
 
