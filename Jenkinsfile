@@ -81,7 +81,8 @@ pipeline {
     }
     success {
    	 	echo 'This will run only if successful'
-		junit './microservicio/build/test-results/test/*.xml' //RUTA DE TUS ARCHIVOS .XML
+		junit '**/test-results/test/*.xml'
+		//junit './microservicio/build/test-results/test/*.xml' //RUTA DE TUS ARCHIVOS .XML
 
     }
 
