@@ -3,6 +3,7 @@ pipeline {
   agent {
     label 'Slave_Induccion'
   }
+  
 environment {
         PROJECT_PATH_BACK = './microservicio/'
   }
@@ -50,10 +51,9 @@ environment {
 
 	stage('Compile & Unit Tests') {
 		steps{
-			'./gradlew clean'
-			//sh './microservicio/gradlew clean'
-			echo "------------>compile & Unit Tests<------------"
 			sh 'chmod +x gradlew'
+			sh './gradlew clean'
+			echo "------------>compile & Unit Tests<------------"
 			sh './gradlew --b ./build.gradle test'
 		}
 	}
