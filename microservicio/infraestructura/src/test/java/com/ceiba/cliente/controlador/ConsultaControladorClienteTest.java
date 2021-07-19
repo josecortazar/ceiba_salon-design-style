@@ -7,6 +7,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.ceiba.ApplicationMock;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,24 +18,25 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 @RunWith(SpringRunner.class)
-@ContextConfiguration(classes= ApplicationMock.class)
+@ContextConfiguration(classes = ApplicationMock.class)
 @WebMvcTest(ConsultaControladorCliente.class)
 public class ConsultaControladorClienteTest {
 
-    @Autowired
-    private MockMvc mocMvc;
+	@Autowired
+	private MockMvc mocMvc;
 
-    @Test
-    public void listar() throws Exception {
-        // arrange
+	@Test
+	public void listarClientes() throws Exception {
+		// arrange act - assert
+		mocMvc.perform(get("/clientes").contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
+				.andExpect(jsonPath("$", hasSize(1))).andExpect(jsonPath("$[0].nombre", is("Juanita")));
+	}
 
-        // act - assert
-        mocMvc.perform(get("/clientes")
-                .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$", hasSize(1)))
-                .andExpect(jsonPath("$[0].nombre", is("Juanita")));
-    }
-
+	@Test
+	public void obtenerCliente() throws Exception {
+		// arrange act - assert
+		mocMvc.perform(get("/clientes/1094952356").contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
+				.andExpect(jsonPath("nombre", is("Juanita")));
+	}
 
 }

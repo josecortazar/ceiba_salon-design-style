@@ -1,5 +1,5 @@
 -- -----------------------------------------------------
 -- Table cliente
 -- -----------------------------------------------------
-SELECT idcliente,nombre,identificacion,correoelectronico,numtelefono 
+SELECT idcliente,nombre,identificacion,correoelectronico,numtelefono,fechanacimiento
 FROM cliente 

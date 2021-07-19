@@ -1,5 +1,7 @@
 package com.ceiba.cliente.comando;
 
+import java.time.LocalDateTime;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,4 +18,5 @@ public class ComandoCliente{
 	private String identificacion;
 	private String correoElectronico;
 	private String numTelefono;
+	private LocalDateTime fechaNacimiento;
 }

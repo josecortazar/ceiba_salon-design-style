@@ -14,14 +14,14 @@ public class ServicioEliminarClienteTest {
 		// arrange
 		Cliente cliente = new ClienteTestDataBuilder().conId(1L).build();
 		RepositorioCliente repositorioCliente = Mockito.spy(RepositorioCliente.class);
-		Mockito.doNothing().when(repositorioCliente).eliminar(Mockito.anyLong());
+		Mockito.doNothing().when(repositorioCliente).eliminar(Mockito.anyString());
 		ServicioEliminarCliente servicioEliminarCliente = new ServicioEliminarCliente(repositorioCliente);
 
 		// act
-		servicioEliminarCliente.ejecutar(cliente.getId());
+		servicioEliminarCliente.ejecutar(cliente.getIdentificacion());
 
 		// assert
-		Mockito.verify(repositorioCliente).eliminar(cliente.getId());
+		Mockito.verify(repositorioCliente).eliminar(cliente.getIdentificacion());
 	}
 
 }

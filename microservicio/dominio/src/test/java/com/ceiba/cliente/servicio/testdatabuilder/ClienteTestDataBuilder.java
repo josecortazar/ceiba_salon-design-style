@@ -1,5 +1,7 @@
 package com.ceiba.cliente.servicio.testdatabuilder;
 
+import java.time.LocalDateTime;
+
 import com.ceiba.cliente.modelo.entidad.Cliente;
 
 public class ClienteTestDataBuilder {
@@ -9,6 +11,8 @@ public class ClienteTestDataBuilder {
 	private String identificacion;
 	private String correoElectronico;
 	private String numTelefono;
+	private LocalDateTime fechaNacimiento;
+	
 
 	public ClienteTestDataBuilder() {
 		id = 1L;
@@ -16,6 +20,13 @@ public class ClienteTestDataBuilder {
 		identificacion = "10949852147";
 		correoElectronico = "luis@gmail.com";
 		numTelefono = "3216549865";
+		fechaNacimiento = LocalDateTime.now();
+
+	}
+	
+	public ClienteTestDataBuilder conFechanacimiento(LocalDateTime fechaNacimiento) {
+		this.fechaNacimiento = fechaNacimiento;
+		return this;
 	}
 
 	public ClienteTestDataBuilder conCorreoElectronico(String correoElectronico) {
@@ -25,6 +36,11 @@ public class ClienteTestDataBuilder {
 
 	public ClienteTestDataBuilder conNumTelefono(String numTelefono) {
 		this.numTelefono = numTelefono;
+		return this;
+	}
+	
+	public ClienteTestDataBuilder conNombre(String nombre) {
+		this.nombre = nombre;
 		return this;
 	}
 	
@@ -39,6 +55,6 @@ public class ClienteTestDataBuilder {
 	}
 
 	public Cliente build() {
-		return new Cliente(id, nombre, identificacion, correoElectronico, numTelefono);
+		return new Cliente(id, nombre, identificacion, correoElectronico, numTelefono, fechaNacimiento);
 	}
 }

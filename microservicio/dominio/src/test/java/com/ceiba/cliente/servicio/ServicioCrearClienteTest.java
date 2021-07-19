@@ -17,21 +17,48 @@ import com.ceiba.cliente.servicio.testdatabuilder.ClienteTestDataBuilder;
 public class ServicioCrearClienteTest {
 
 	@Test
-	public void validaIdentificaionTest() {
-		// arrange
-		ClienteTestDataBuilder clienteTestDataBuilder = new ClienteTestDataBuilder().conIdentficacion("1O9A6545052");
-		// act - assert
-		BasePrueba.assertThrows(() -> clienteTestDataBuilder.build(), ExcepcionValorInvalido.class,
-				"Se debe ingresar un numero de identificacion valido");
-	}
-
-	@Test
 	public void validarCampoIdentificacionTest() {
 		// arrange
 		ClienteTestDataBuilder clienteTestDataBuilder = new ClienteTestDataBuilder().conIdentficacion(null);
 		// act - assert
 		BasePrueba.assertThrows(() -> clienteTestDataBuilder.build(), ExcepcionValorObligatorio.class,
 				"Se debe ingresar la identificacion del cliente");
+	}
+
+	@Test
+	public void validarIdentificaionTest() {
+		// arrange
+		ClienteTestDataBuilder clienteTestDataBuilder = new ClienteTestDataBuilder().conIdentficacion("lO9A6545O52");
+		// act - assert
+		BasePrueba.assertThrows(() -> clienteTestDataBuilder.build(), ExcepcionValorInvalido.class,
+				"Se debe ingresar un numero de identificacion valido");
+	}
+
+	@Test
+	public void validarCampoNombreTest() {
+		// arrange
+		ClienteTestDataBuilder clienteTestDataBuilder = new ClienteTestDataBuilder().conNombre(null);
+		// act - assert
+		BasePrueba.assertThrows(() -> clienteTestDataBuilder.build(), ExcepcionValorObligatorio.class,
+				"Se debe ingresar el nombre del cliente");
+	}
+
+	@Test
+	public void validarNombreTest() {
+		// arrange
+		ClienteTestDataBuilder clienteTestDataBuilder = new ClienteTestDataBuilder().conNombre("4ndres L0pez");
+		// act - assert
+		BasePrueba.assertThrows(() -> clienteTestDataBuilder.build(), ExcepcionValorInvalido.class,
+				"Se debe ingresar un nombre valido");
+	}
+
+	@Test
+	public void validarCampoCorreoElectronicoTest() {
+		// arrange
+		ClienteTestDataBuilder clienteTestDataBuilder = new ClienteTestDataBuilder().conCorreoElectronico(null);
+		// act - assert
+		BasePrueba.assertThrows(() -> clienteTestDataBuilder.build(), ExcepcionValorObligatorio.class,
+				"Se debe ingresar el correo electronico del cliente");
 	}
 
 	@Test
@@ -45,12 +72,12 @@ public class ServicioCrearClienteTest {
 	}
 
 	@Test
-	public void validarCampoCorreoElectronicoTest() {
+	public void validarCampoNumTelefonoTest() {
 		// arrange
-		ClienteTestDataBuilder clienteTestDataBuilder = new ClienteTestDataBuilder().conCorreoElectronico(null);
+		ClienteTestDataBuilder clienteTestDataBuilder = new ClienteTestDataBuilder().conNumTelefono(null);
 		// act - assert
 		BasePrueba.assertThrows(() -> clienteTestDataBuilder.build(), ExcepcionValorObligatorio.class,
-				"Se debe ingresar el correo electronico del cliente");
+				"Se debe ingresar el numero telefonico del cliente");
 	}
 
 	@Test
@@ -63,12 +90,12 @@ public class ServicioCrearClienteTest {
 	}
 
 	@Test
-	public void validarCampoNumTelefonoTest() {
+	public void validarCampoFechaNacimientoTest() {
 		// arrange
-		ClienteTestDataBuilder clienteTestDataBuilder = new ClienteTestDataBuilder().conNumTelefono(null);
+		ClienteTestDataBuilder clienteTestDataBuilder = new ClienteTestDataBuilder().conFechanacimiento(null);
 		// act - assert
 		BasePrueba.assertThrows(() -> clienteTestDataBuilder.build(), ExcepcionValorObligatorio.class,
-				"Se debe ingresar el numero telefonico del cliente");
+				"Se debe ingresar una fecha de nacimiento");
 	}
 
 	@Test
@@ -76,7 +103,7 @@ public class ServicioCrearClienteTest {
 		// arrange
 		Cliente usuario = new ClienteTestDataBuilder().build();
 		RepositorioCliente repositorioCliente = Mockito.mock(RepositorioCliente.class);
-		Mockito.when(repositorioCliente.existe(Mockito.anyLong())).thenReturn(true);
+		Mockito.when(repositorioCliente.existe(Mockito.anyString())).thenReturn(true);
 		ServicioCrearCliente servicioCrearCliente = new ServicioCrearCliente(repositorioCliente);
 
 		// act - assert
@@ -89,9 +116,9 @@ public class ServicioCrearClienteTest {
 		// arrange
 		Cliente cliente = new ClienteTestDataBuilder().build();
 		RepositorioCliente repositorioCliente = Mockito.mock(RepositorioCliente.class);
-		Mockito.when(repositorioCliente.existe(Mockito.any())).thenReturn(false);
+		Mockito.when(repositorioCliente.existe(Mockito.anyString())).thenReturn(false);
 		ServicioCrearCliente servicioCrearCliente = new ServicioCrearCliente(repositorioCliente);
-		
+
 		// act
 		servicioCrearCliente.ejecutar(cliente);
 

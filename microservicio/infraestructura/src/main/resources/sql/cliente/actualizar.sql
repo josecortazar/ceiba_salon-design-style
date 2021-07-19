@@ -2,10 +2,10 @@
 -- Table cliente
 -- -----------------------------------------------------
 
-UPDATE cliente set 
-	nombre = :nombre,
-	correoelectronico = :correoElectronico,
-	identificacion = :identificacion,
-	numtelefono = :numTelefono
-WHERE idcliente = :id
-
+UPDATE cliente SET 
+	identificacion = :identificacion, 
+	nombre = :nombre, 
+	correoelectronico = :correoElectronico, 
+	numtelefono = :numTelefono, 
+	fechanacimiento = :fechaNacimiento
+WHERE identificacion = :identificacion

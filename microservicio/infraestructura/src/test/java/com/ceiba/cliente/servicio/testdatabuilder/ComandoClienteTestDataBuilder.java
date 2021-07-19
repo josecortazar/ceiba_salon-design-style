@@ -1,5 +1,7 @@
 package com.ceiba.cliente.servicio.testdatabuilder;
 
+import java.time.LocalDateTime;
+
 import com.ceiba.cliente.comando.ComandoCliente;
 
 public class ComandoClienteTestDataBuilder {
@@ -9,6 +11,8 @@ public class ComandoClienteTestDataBuilder {
 	private String identificacion;
 	private String correoElectronico;
 	private String numTelefono;
+    private LocalDateTime fechaNacimiento;
+
 
 	public ComandoClienteTestDataBuilder() {
 		id = 2L;
@@ -16,6 +20,7 @@ public class ComandoClienteTestDataBuilder {
 		identificacion = "10951623635";
 		correoElectronico = "juanita2000@hotmail.com";
 		numTelefono = "3124567896";
+		fechaNacimiento = LocalDateTime.now();
 	}
 
 	public ComandoClienteTestDataBuilder conNombre(String nombre) {
@@ -39,6 +44,6 @@ public class ComandoClienteTestDataBuilder {
 	}
 
 	public ComandoCliente build() {
-		return new ComandoCliente(id, nombre, identificacion, correoElectronico, numTelefono);
+		return new ComandoCliente(id, nombre, identificacion, correoElectronico, numTelefono, fechaNacimiento);
 	}
 }

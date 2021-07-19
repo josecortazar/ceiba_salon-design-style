@@ -4,4 +4,4 @@
 
 DELETE 
 FROM cliente
-WHERE idcliente = :id
+WHERE identificacion = :identificacion

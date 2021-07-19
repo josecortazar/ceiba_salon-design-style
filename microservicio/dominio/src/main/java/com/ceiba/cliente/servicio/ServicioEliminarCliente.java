@@ -10,7 +10,7 @@ public class ServicioEliminarCliente {
 		this.repositorioCliente = repositorioCliente;
 	}
 
-	public void ejecutar(Long id) {
-		this.repositorioCliente.eliminar(id);
+	public void ejecutar(String identificacion) {
+		this.repositorioCliente.eliminar(identificacion);
 	}
 }

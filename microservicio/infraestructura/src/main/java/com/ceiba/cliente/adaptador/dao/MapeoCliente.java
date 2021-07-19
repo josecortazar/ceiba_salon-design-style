@@ -2,6 +2,7 @@ package com.ceiba.cliente.adaptador.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 
 import com.ceiba.cliente.modelo.dto.DtoCliente;
 import com.ceiba.infraestructura.jdbc.MapperResult;
@@ -17,8 +18,9 @@ public class MapeoCliente implements RowMapper<DtoCliente>, MapperResult {
 		String identificacion = resultSet.getString("identificacion");
 		String correoElectronico = resultSet.getString("correoelectronico");
 		String numTelefono = resultSet.getString("numtelefono");
-
-		return new DtoCliente(id, nombre, identificacion, correoElectronico, numTelefono);
+		LocalDateTime fechaNacimiento = extraerLocalDateTime(resultSet, "fechanacimiento");
+		
+		return new DtoCliente(id, nombre, identificacion, correoElectronico, numTelefono, fechaNacimiento);
 	}
 
 }

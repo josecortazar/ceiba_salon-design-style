@@ -23,7 +23,7 @@ public interface RepositorioCliente {
 	 * 
 	 * @param id
 	 */
-	void eliminar(Long id);
+	void eliminar(String identificacion);
 
 	/**
 	 * Permite validar si existe un cliente con id
@@ -31,7 +31,7 @@ public interface RepositorioCliente {
 	 * @param id
 	 * @return si existe o no
 	 */
-	boolean existe(Long id);
+	boolean existe(String identificacion);
 
 	/**
 	 * Permite validar si existe un cliente con un nombre excluyendo un id
@@ -39,6 +39,6 @@ public interface RepositorioCliente {
 	 * @param id, nombre
 	 * @return si existe o no
 	 */
-	boolean existeExcluyendoId(Long id, String nombre);
+	boolean existeExcluyendoId(Long id, String identificacion);
 
 }

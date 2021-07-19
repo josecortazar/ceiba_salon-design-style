@@ -15,7 +15,8 @@ public class FabricaCliente {
                 comandoCliente.getNombre(),
                 comandoCliente.getIdentificacion(),
                 comandoCliente.getCorreoElectronico(),
-                comandoCliente.getNumTelefono()
+                comandoCliente.getNumTelefono(),
+                comandoCliente.getFechaNacimiento()
         );
     }
 

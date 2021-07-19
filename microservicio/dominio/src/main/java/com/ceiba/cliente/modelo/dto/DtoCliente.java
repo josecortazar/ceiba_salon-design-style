@@ -1,5 +1,7 @@
 package com.ceiba.cliente.modelo.dto;
 
+import java.time.LocalDateTime;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -12,5 +14,6 @@ public class DtoCliente {
     private String identificacion;
     private String correoElectronico;
     private String numTelefono;
+    private LocalDateTime fechaNacimiento;
 
 }

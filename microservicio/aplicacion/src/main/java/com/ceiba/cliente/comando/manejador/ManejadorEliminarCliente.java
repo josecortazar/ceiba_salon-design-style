@@ -5,7 +5,7 @@ import com.ceiba.manejador.ManejadorComando;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ManejadorEliminarCliente implements ManejadorComando<Long> {
+public class ManejadorEliminarCliente implements ManejadorComando<String> {
 
 	private final ServicioEliminarCliente servicioEliminarCliente;
 
@@ -13,7 +13,7 @@ public class ManejadorEliminarCliente implements ManejadorComando<Long> {
 		this.servicioEliminarCliente = servicioEliminarCliente;
 	}
 
-	public void ejecutar(Long id) {
-		this.servicioEliminarCliente.ejecutar(id);
+	public void ejecutar(String identificacion) {
+		this.servicioEliminarCliente.ejecutar(identificacion);
 	}
 }

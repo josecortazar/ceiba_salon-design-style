@@ -2,5 +2,4 @@
 -- Table cliente
 -- -----------------------------------------------------
 
-SELECT count(1) FROM cliente WHERE idcliente = :id
-
+SELECT count(1) FROM cliente WHERE identificacion = :identificacion

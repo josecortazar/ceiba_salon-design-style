@@ -32,7 +32,7 @@ public class ComandoControladorClienteTest {
 	private MockMvc mocMvc;
 
 	@Test
-	public void crear() throws Exception {
+	public void crearCliente() throws Exception {
 		// arrange
 		ComandoCliente cliente = new ComandoClienteTestDataBuilder().build();
 
@@ -44,24 +44,24 @@ public class ComandoControladorClienteTest {
 	}
 
 	@Test
-	public void actualizar() throws Exception {
+	public void actualizarCliente() throws Exception {
 		// arrange
-		Long id = 1L;
-		ComandoCliente cliente = new ComandoClienteTestDataBuilder().build();
+		String identificacion = "1094952356";
+		ComandoCliente cliente = new ComandoClienteTestDataBuilder().conIdentificacion(identificacion).build();
 
 		// act - assert
-		mocMvc.perform(put("/clientes/{id}", id).contentType(MediaType.APPLICATION_JSON)
+		mocMvc.perform(put("/clientes/{identificacion}", identificacion).contentType(MediaType.APPLICATION_JSON)
 				.content(objectMapper.writeValueAsString(cliente))).andExpect(status().isOk());
 	}
 
 	@Test
-	public void eliminar() throws Exception {
+	public void eliminarCliente() throws Exception {
 		// arrange
-		Long id = 2L;
+		String identificacion = "10951623635";
 
 		// act - assert
 		mocMvc.perform(
-				delete("/clientes/{id}", id).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON))
+				delete("/clientes/{identificacion}", identificacion).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk());
 	}
 	

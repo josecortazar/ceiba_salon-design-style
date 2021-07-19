@@ -22,8 +22,12 @@ public class ComandoControladorCliente {
 	private final ManejadorActualizarCliente manejadorActualizarCliente;
 
 	@Autowired
-	public ComandoControladorCliente(ManejadorCrearCliente manejadorCrearCliente,
-			ManejadorEliminarCliente manejadorEliminarCliente, ManejadorActualizarCliente manejadorActualizarCliente) {
+	public ComandoControladorCliente(
+			ManejadorCrearCliente manejadorCrearCliente,
+			ManejadorEliminarCliente manejadorEliminarCliente, 
+			ManejadorActualizarCliente manejadorActualizarCliente
+			) {
+		
 		this.manejadorCrearCliente = manejadorCrearCliente;
 		this.manejadorEliminarCliente = manejadorEliminarCliente;
 		this.manejadorActualizarCliente = manejadorActualizarCliente;
@@ -35,16 +39,16 @@ public class ComandoControladorCliente {
 		return manejadorCrearCliente.ejecutar(comandoCliente);
 	}
 
-	@DeleteMapping(value = "/{id}")
+	@DeleteMapping(value = "/{identificacion}")
 	@ApiOperation("Eliminar Cliente")
-	public void eliminar(@PathVariable Long id) {
-		manejadorEliminarCliente.ejecutar(id);
+	public void eliminar(@PathVariable String identificacion) {
+		manejadorEliminarCliente.ejecutar(identificacion);
 	}
 
-	@PutMapping(value = "/{id}")
-	@ApiOperation("Actualizar Usuario")
-	public void actualizar(@RequestBody ComandoCliente comandoCliente, @PathVariable Long id) {
-		comandoCliente.setId(id);
+	@PutMapping(value = "/{identificacion}")
+	@ApiOperation("Actualizar Cliente")
+	public void actualizar(@RequestBody ComandoCliente comandoCliente, @PathVariable String identificacion) {
+		comandoCliente.setIdentificacion(identificacion);
 		manejadorActualizarCliente.ejecutar(comandoCliente);
 	}
 }

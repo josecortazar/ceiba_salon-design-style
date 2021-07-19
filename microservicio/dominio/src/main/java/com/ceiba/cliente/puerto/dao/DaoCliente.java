@@ -12,4 +12,13 @@ public interface DaoCliente {
 	 * @return los clientes
 	 */
 	List<DtoCliente> listar();
+
+	/**
+	 * Permite obtener un cliente segun su identificacion
+	 * @param identificacion
+	 * @return
+	 */
+	DtoCliente obtener(String identificacion);
+	
+	
 }

@@ -2,7 +2,7 @@ package com.ceiba.cliente.servicio;
 
 import com.ceiba.cliente.modelo.entidad.Cliente;
 import com.ceiba.cliente.puerto.repositorio.RepositorioCliente;
-import com.ceiba.dominio.excepcion.ExcepcionDuplicidad;
+import com.ceiba.dominio.excepcion.ExcepcionSinDatos;
 
 public class ServicioActualizarCliente {
 
@@ -20,9 +20,9 @@ public class ServicioActualizarCliente {
 	}
 
 	private void validarExistenciaPrevia(Cliente cliente) {
-		boolean existe = this.repositorioCliente.existe(cliente.getId());
+		boolean existe = this.repositorioCliente.existe(cliente.getIdentificacion());
 		if (!existe) {
-			throw new ExcepcionDuplicidad(EL_USUARIO_NO_EXISTE_EN_EL_SISTEMA);
+			throw new ExcepcionSinDatos(EL_USUARIO_NO_EXISTE_EN_EL_SISTEMA);
 		}
 	}
 }

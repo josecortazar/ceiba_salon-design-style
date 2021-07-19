@@ -2,5 +2,5 @@
 -- Table cliente
 -- -----------------------------------------------------
 
-INSERT INTO cliente (idcliente, nombre, identificacion, correoelectronico, numtelefono)
-VALUES (:id, :nombre, :identificacion, :correoElectronico, :numTelefono)
+INSERT INTO cliente (idcliente, nombre, identificacion, correoelectronico, numtelefono, fechanacimiento)
+VALUES (:id, :nombre, :identificacion, :correoElectronico, :numTelefono, :fechaNacimiento)

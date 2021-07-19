@@ -37,17 +37,17 @@ public class RepositorioClienteMysql implements RepositorioCliente {
 	}
 
 	@Override
-	public void eliminar(Long id) {
+	public void eliminar(String identificacion) {
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
-		paramSource.addValue("id", id);
+		paramSource.addValue("identificacion", identificacion);
 
 		this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().update(sqlEliminar, paramSource);
 	}
 
 	@Override
-	public boolean existe(Long id) {
+	public boolean existe(String identificacion) {
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
-		paramSource.addValue("id", id);
+		paramSource.addValue("identificacion", identificacion);
 
 		return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlExiste,
 				paramSource, Boolean.class);
@@ -59,10 +59,10 @@ public class RepositorioClienteMysql implements RepositorioCliente {
 	}
 
 	@Override
-	public boolean existeExcluyendoId(Long id, String nombre) {
+	public boolean existeExcluyendoId(Long id, String identificacion) {
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
 		paramSource.addValue("id", id);
-		paramSource.addValue("nombre", nombre);
+		paramSource.addValue("identificacion", identificacion);
 
 		return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate()
 				.queryForObject(sqlExisteExcluyendoId, paramSource, Boolean.class);
