@@ -14,25 +14,25 @@ import org.springframework.stereotype.Repository;
 public class CustomNamedParameterJdbcTemplate {
 
 	private static final String ERROR_OBTENIENDO_EL_NOMBRE_Y_VALOR_DE_OBJETO = "Error obteniendo el nombre y valor de objeto";
-	
+
 	private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
-	
+
 	public CustomNamedParameterJdbcTemplate(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
 		this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
 	}
-	
-	public Long crear(Object object,String sql) {
+
+	public Long crear(Object object, String sql) {
 		MapSqlParameterSource paramSource = crearParametros(object);
 		KeyHolder keyHolder = new GeneratedKeyHolder();
-		this.namedParameterJdbcTemplate.update(sql, paramSource,keyHolder,new String[] { "id" });
+		this.namedParameterJdbcTemplate.update(sql, paramSource, keyHolder, new String[] { "id" });
 		return keyHolder.getKey().longValue();
 	}
-	
-	public void actualizar(Object object,String sql) {
+
+	public void actualizar(Object object, String sql) {
 		MapSqlParameterSource paramSource = crearParametros(object);
 		this.namedParameterJdbcTemplate.update(sql, paramSource);
 	}
-	
+
 	private MapSqlParameterSource crearParametros(Object object) {
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
 		Field[] fields = object.getClass().getDeclaredFields();
@@ -46,11 +46,11 @@ public class CustomNamedParameterJdbcTemplate {
 				}
 			} catch (Exception e) {
 				throw new ExcepcionTecnica(ERROR_OBTENIENDO_EL_NOMBRE_Y_VALOR_DE_OBJETO, e);
-			} 
+			}
 		}
 		return paramSource;
 	}
-	
+
 	public NamedParameterJdbcTemplate getNamedParameterJdbcTemplate() {
 		return this.namedParameterJdbcTemplate;
 	}

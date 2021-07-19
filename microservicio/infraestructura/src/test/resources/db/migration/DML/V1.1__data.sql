@@ -1,1 +1,2 @@
-insert into usuario(nombre,clave,fecha_creacion) values('test','1234',now())
+INSERT INTO cliente ( nombre, identificacion, correoelectronico,numtelefono)
+VALUES ('Luisa Gomez', '1094952356','luisa@gmail.com', '3107412596')
