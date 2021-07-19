@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component;
 
 import com.ceiba.cliente.modelo.dto.DtoCliente;
 import com.ceiba.cliente.puerto.dao.DaoCliente;
-import com.ceiba.dominio.excepcion.ExcepcionSinDatos;
+import com.ceiba.excepcion.ExcepcionDatoNoEncontrado;
 
 @Component
 public class ManejadorObtenerCliente {
@@ -20,7 +20,7 @@ public class ManejadorObtenerCliente {
 		try {
 			return this.daoCliente.obtener(identificacion);
 		} catch (Exception e) {
-			throw new ExcepcionSinDatos(EL_USUARIO_NO_EXISTE_EN_EL_SISTEMA);
+			throw new ExcepcionDatoNoEncontrado(EL_USUARIO_NO_EXISTE_EN_EL_SISTEMA);
 		}
 	}
 }

@@ -2,7 +2,7 @@ package com.ceiba.servicio.consulta;
 
 import org.springframework.stereotype.Component;
 
-import com.ceiba.dominio.excepcion.ExcepcionSinDatos;
+import com.ceiba.excepcion.ExcepcionDatoNoEncontrado;
 import com.ceiba.servicio.modelo.dto.DtoServicio;
 import com.ceiba.servicio.puerto.dao.DaoServicio;
 
@@ -22,7 +22,7 @@ public class ManejadorObtenerServicio {
 		try {
 			return this.daoServicio.obtener(id);
 		} catch (Exception e) {
-			throw new ExcepcionSinDatos(EL_SERVICIO_NO_EXISTE_EN_EL_SISTEMA);
+			throw new ExcepcionDatoNoEncontrado(EL_SERVICIO_NO_EXISTE_EN_EL_SISTEMA);
 		}
 		
 	}
