@@ -8,7 +8,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.ceiba.ApplicationMock;
 import com.ceiba.servicio.comando.ComandoServicio;
-import com.ceiba.servicio.controlador.ComandoControladorServicio;
 import com.ceiba.servicio.servicio.testdatabuilder.ComandoServicioTestDataBuilder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
