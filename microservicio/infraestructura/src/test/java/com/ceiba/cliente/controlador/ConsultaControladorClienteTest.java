@@ -29,14 +29,14 @@ public class ConsultaControladorClienteTest {
 	public void listarClientes() throws Exception {
 		// arrange act - assert
 		mocMvc.perform(get("/clientes").contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
-				.andExpect(jsonPath("$", hasSize(1))).andExpect(jsonPath("$[0].nombre", is("Juanita")));
+				.andExpect(jsonPath("$", hasSize(1))).andExpect(jsonPath("$[0].nombre", is("Luisa Gomez")));
 	}
 
 	@Test
 	public void obtenerCliente() throws Exception {
 		// arrange act - assert
 		mocMvc.perform(get("/clientes/1094952356").contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
-				.andExpect(jsonPath("nombre", is("Juanita")));
+				.andExpect(jsonPath("nombre", is("Luisa Gomez")));
 	}
 
 }

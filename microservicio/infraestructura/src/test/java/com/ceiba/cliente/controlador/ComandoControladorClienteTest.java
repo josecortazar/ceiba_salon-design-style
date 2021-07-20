@@ -45,8 +45,8 @@ public class ComandoControladorClienteTest {
 	@Test
 	public void actualizarCliente() throws Exception {
 		// arrange
-		String identificacion = "1094952356";
-		ComandoCliente cliente = new ComandoClienteTestDataBuilder().conIdentificacion(identificacion).build();
+		String identificacion = "10951623635";
+		ComandoCliente cliente = new ComandoClienteTestDataBuilder().conNombre("Juana").build();
 
 		// act - assert
 		mocMvc.perform(put("/clientes/{identificacion}", identificacion).contentType(MediaType.APPLICATION_JSON)
