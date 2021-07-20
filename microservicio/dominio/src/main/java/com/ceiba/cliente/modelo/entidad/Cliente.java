@@ -22,7 +22,6 @@ public class Cliente {
 
 	private static final String VALIDADOR_LETRAS = "[(a-zA-Z)+(\\ *)+]+";
 	private static final String VALIDADOR_NUMERICO = "[0-9]+";
-	private static final String VALIDADOR__CORREO = "([a-z0-9]+(\\_*)+(\\.?[a-z0-9])*)+@(([a-z]+)\\.([a-z]+))+";
 
 	private Long id;
 	private String nombre;
@@ -43,7 +42,7 @@ public class Cliente {
 		validarRegex(nombre, VALIDADOR_LETRAS, SE_DEBE_INGRESAR_UN_NOMBRE_VALIDO);
 		validarRegex(identificacion, VALIDADOR_NUMERICO, SE_DEBE_INGRESAR_UNA_LA_IDENTIFICACION_VALIDA);
 		validarRegex(numTelefono, VALIDADOR_NUMERICO, SE_DEBE_INGRESAR_UN_NUMERO_DE_CONTACTO_VALIDO);
-		validarRegex(correoElectronico, VALIDADOR__CORREO, SE_DEBE_INGRESAR_UN_CORREO_ELECTRONICO_VALIDO);
+		validarRegex(correoElectronico, "([a-z0-9]+(\\_*)+(\\.?[a-z0-9])*)+@(([a-z]+)\\.([a-z]+))+", SE_DEBE_INGRESAR_UN_CORREO_ELECTRONICO_VALIDO);
 		validarRegex(numTelefono, VALIDADOR_NUMERICO, SE_DEBE_INGRESAR_UN_NUMERO_DE_CONTACTO_VALIDO);
 
 		this.id = id;
