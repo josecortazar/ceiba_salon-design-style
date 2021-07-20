@@ -9,14 +9,14 @@ public interface DaoServicio {
 	/**
 	 * Permite listar los servicios
 	 * 
-	 * @return los clientes
+	 * @return lista de DTOs de servicios
 	 */
 	List<DtoServicio> listar();
 
 	/**
-	 * Permite obtener un cliente segun su identificacion
-	 * @param identificacion
-	 * @return
+	 * Permite obtener un servicio segun su id
+	 * @param id
+	 * @return servicio en un DTO
 	 */
 	DtoServicio obtener(Long id);
 	

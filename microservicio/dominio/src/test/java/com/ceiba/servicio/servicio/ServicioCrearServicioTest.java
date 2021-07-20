@@ -61,7 +61,7 @@ public class ServicioCrearServicioTest {
 	}
 
 	@Test
-	public void validarClienteExistenciaPreviaTest() {
+	public void validarServicioExistenciaPreviaTest() {
 		// arrange
 		Servicio servicio = new ServicioTestDataBuilder().build();
 		RepositorioServicio repositorioServicio = Mockito.mock(RepositorioServicio.class);

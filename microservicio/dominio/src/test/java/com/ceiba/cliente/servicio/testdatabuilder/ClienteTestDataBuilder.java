@@ -20,7 +20,7 @@ public class ClienteTestDataBuilder {
 		identificacion = "10949852147";
 		correoElectronico = "luis@gmail.com";
 		numTelefono = "3216549865";
-		fechaNacimiento = LocalDateTime.now();
+		fechaNacimiento = LocalDateTime.of(2000, 07, 15, 02, 10);
 
 	}
 	
