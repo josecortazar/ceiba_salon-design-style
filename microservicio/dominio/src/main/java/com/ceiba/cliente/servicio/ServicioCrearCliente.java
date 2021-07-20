@@ -19,7 +19,7 @@ public class ServicioCrearCliente {
 		return this.repositorioCliente.crear(cliente);
 	}
 
-	private void validarExistenciaPrevia(Cliente cliente) {
+	public void validarExistenciaPrevia(Cliente cliente) {
 		boolean existe = this.repositorioCliente.existe(cliente.getIdentificacion());
 		if (existe) {
 			throw new ExcepcionDuplicidad(EL_USUARIO_YA_EXISTE_EN_EL_SISTEMA);
