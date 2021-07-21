@@ -15,8 +15,6 @@ public class RepositorioClienteMysql implements RepositorioCliente {
 	private static final String CAMPO_IDENTIFICACION = "identificacion";
 	private static final String CAMPO_ID = "id";
 
-	private MapSqlParameterSource paramSource;
-
 	@SqlStatement(namespace = "cliente", value = "crear")
 	private static String sqlCrear;
 
@@ -33,7 +31,6 @@ public class RepositorioClienteMysql implements RepositorioCliente {
 	private static String sqlExisteExcluyendoId;
 
 	public RepositorioClienteMysql(CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate) {
-		paramSource = new MapSqlParameterSource();
 		this.customNamedParameterJdbcTemplate = customNamedParameterJdbcTemplate;
 	}
 
@@ -44,6 +41,7 @@ public class RepositorioClienteMysql implements RepositorioCliente {
 
 	@Override
 	public void eliminar(String identificacion) {
+		MapSqlParameterSource paramSource = new MapSqlParameterSource();
 		paramSource.addValue(CAMPO_IDENTIFICACION, identificacion);
 
 		this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().update(sqlEliminar, paramSource);
@@ -51,6 +49,7 @@ public class RepositorioClienteMysql implements RepositorioCliente {
 
 	@Override
 	public boolean existe(String identificacion) {
+		MapSqlParameterSource paramSource = new MapSqlParameterSource();
 		paramSource.addValue(CAMPO_IDENTIFICACION, identificacion);
 
 		return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlExiste,
