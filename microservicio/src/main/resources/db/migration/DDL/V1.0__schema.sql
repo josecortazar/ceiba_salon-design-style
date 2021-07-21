@@ -27,6 +27,7 @@ CREATE TABLE IF NOT EXISTS reserva (
   fechareserva DATETIME NOT NULL,
   preciototal DOUBLE NOT NULL,
   precioneto DOUBLE NOT NULL,
+  cantidadservicios INT NOT NULL,
   esreservademenor TINYINT NOT NULL,
   PRIMARY KEY (idreserva),
   FOREIGN KEY (idcliente) REFERENCES cliente (idcliente)

@@ -16,7 +16,7 @@ import com.ceiba.dominio.excepcion.ExcepcionFechaReserva;
 import com.ceiba.dominio.excepcion.ExcepcionHoraroReserva;
 import com.ceiba.dominio.excepcion.ExcepcionValorObligatorio;
 
-public class ServicioTest {
+public class ReservaTest {
 
 	@Test
 	public void validarCampoCliente() {
@@ -92,7 +92,7 @@ public class ServicioTest {
 		Reserva reserva = reservaTestDataBuilder.build();
 
 		// act - assert
-		assertThat((reserva.getPrecioNeto() * 1.1), CoreMatchers.is(reserva.getPrecioTotal()));
+		assertThat(reserva.getPrecioTotal(), CoreMatchers.is(reserva.getPrecioNeto() * 1.1));
 	}
 
 	@Test
@@ -105,7 +105,44 @@ public class ServicioTest {
 		Reserva reserva = reservaTestDataBuilder.build();
 
 		// act - assert
-		assertThat((reserva.getPrecioNeto() * 1.15), CoreMatchers.is(reserva.getPrecioTotal()));
+		assertThat(reserva.getPrecioTotal(), CoreMatchers.is(reserva.getPrecioNeto() * 1.15));
+	}
+
+	@Test
+	public void validarDescuentoTresServicios() {
+		// arrange
+		ReservaTestDataBuilder reservaTestDataBuilder = new ReservaTestDataBuilder().conCantidadServicios(3L);
+
+		Reserva reserva = reservaTestDataBuilder.build();
+
+		// act - assert
+		assertThat(reserva.getPrecioTotal(), CoreMatchers.is(reserva.getPrecioNeto() * 0.9));
+	}
+
+	@Test
+	public void validarIncrementoFestivosConDescuento() {
+		// arrange
+		ReservaTestDataBuilder reservaTestDataBuilder = new ReservaTestDataBuilder()
+				.conFechaCreacion(LocalDateTime.of(2021, 7, 16, 11, 00));
+		reservaTestDataBuilder.conFechaReserva(LocalDateTime.of(2021, 7, 20, 13, 00));
+		reservaTestDataBuilder.conCantidadServicios(3L);
+		Reserva reserva = reservaTestDataBuilder.build();
+
+		// act - assert
+		assertThat(reserva.getPrecioTotal(), CoreMatchers.is(reserva.getPrecioNeto() * ((1.0 + 0.15) - 0.1)));
+	}
+	
+	@Test
+	public void validarIncrementoDomingoConDescuento() {
+		// arrange
+		ReservaTestDataBuilder reservaTestDataBuilder = new ReservaTestDataBuilder()
+				.conFechaCreacion(LocalDateTime.of(2021, 7, 16, 11, 00));
+		reservaTestDataBuilder.conFechaReserva(LocalDateTime.of(2021, 7, 24, 13, 00));
+		reservaTestDataBuilder.conCantidadServicios(3L);
+		Reserva reserva = reservaTestDataBuilder.build();
+
+		// act - assert
+		assertThat(reserva.getPrecioTotal(), CoreMatchers.is(reserva.getPrecioNeto() * ((1.0 + 0.1) - 0.1)));
 	}
 
 }

@@ -10,6 +10,7 @@ import static com.ceiba.dominio.ValidadorArgumento.validarFechaReserva;
 import static com.ceiba.dominio.ValidadorArgumento.validarHorarioReserva;
 import static com.ceiba.dominio.ValidadorArgumento.validarIncrementoFinesSemana;
 import static com.ceiba.dominio.ValidadorArgumento.validarIncrementoFestivos;
+import static com.ceiba.dominio.ValidadorArgumento.validarDescuento;
 
 import java.time.LocalDateTime;
 
@@ -34,11 +35,14 @@ public class Reserva {
 	private static final int DIA_INICIAL_LUNES_RESERVAS = 1;
 	private static final int DIA_FINAL_VIERNES_RESERVAS = 5;
 
-	private static final double INCREMENTO_FINES_DE_SEMANA = 0.1;
-	private static final double INCREMENTO_FESTIVOS = 0.15;
-
 	private static final int DIA_DOMINGO = 7;
 	private static final int DIA_SABADO = 6;
+
+	private static final long CANTIDAD_PARA_DESCUENTO = 3;
+
+	private static final double DESCUENTO_TRES_SERVICIOS = 0.1;
+	private static final double INCREMENTO_FINES_DE_SEMANA = 0.1;
+	private static final double INCREMENTO_FESTIVOS = 0.15;
 
 	private Long id;
 	private Long idCliente;
@@ -46,12 +50,13 @@ public class Reserva {
 	private LocalDateTime fechaReserva;
 	private Double precioNeto;
 	private Double precioTotal;
+	private Long cantidadServicios;
 	private Boolean esReservaDeMenor;
 
 	public Reserva(Long id, Long idCliente, LocalDateTime fechaCreacion, LocalDateTime fechaReserva, Double precioNeto,
-			Double precioTotal, Boolean esReservaDeMenor) {
+			Double precioTotal, Long cantidadServicios, Boolean esReservaDeMenor) {
 
-		double alteracionPrecio = 1;
+		double alteracionPrecio = 1.0;
 
 		validarObligatorio(idCliente, SE_DEBE_INGRESAR_EL_CLIENTE_DE_LA_RESERVA);
 		validarObligatorio(fechaCreacion, SE_DEBE_INGRESAR_UNA_FECHA_DE_CREACION);
@@ -70,6 +75,10 @@ public class Reserva {
 			alteracionPrecio = alteracionPrecio + INCREMENTO_FINES_DE_SEMANA;
 		}
 
+		if (validarDescuento(cantidadServicios, CANTIDAD_PARA_DESCUENTO)) {
+			alteracionPrecio = alteracionPrecio - DESCUENTO_TRES_SERVICIOS;
+		}
+
 		if (precioNeto == null) {
 			precioNeto = 0.0;
 		}
@@ -80,6 +89,7 @@ public class Reserva {
 		this.fechaReserva = fechaReserva;
 		this.precioNeto = precioNeto;
 		this.precioTotal = precioNeto * alteracionPrecio;
+		this.cantidadServicios = cantidadServicios;
 		this.esReservaDeMenor = esReservaDeMenor;
 	}
 

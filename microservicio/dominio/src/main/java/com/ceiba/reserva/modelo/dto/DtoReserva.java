@@ -15,6 +15,8 @@ public class DtoReserva{
     private LocalDateTime fechaReserva;
     private Double precioNeto;
     private Double precioTotal;
+    private Long cantidadServicios;
     private Boolean esReservaDeMenor;
 
+    
 }

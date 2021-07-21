@@ -44,7 +44,6 @@ public class DaoClienteMysql implements DaoCliente {
 
 	@Override
 	public DtoCliente obtener(Long id) {
-		System.out.println(sqlObtenerId);
 		MapSqlParameterSource parametro = new MapSqlParameterSource();
 		parametro.addValue("id", id);
 		return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate()

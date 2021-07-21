@@ -5,5 +5,6 @@
 UPDATE reserva SET  
 	fechareserva = :fechaReserva, 
 	preciototal = :precioTotal, 
-	precioneto = :precioNeto
+	precioneto = :precioNeto,
+	cantidadservicios = :cantidadServicios
 WHERE idreserva = :id

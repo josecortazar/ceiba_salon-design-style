@@ -12,6 +12,7 @@ public class ReservaTestDataBuilder {
 	private LocalDateTime fechaReserva;
 	private Double precioNeto;
 	private Double precioTotal;
+	private Long cantidadServicios;
 	private Boolean esReservaDeMenor;
 
 	public ReservaTestDataBuilder() {
@@ -21,7 +22,13 @@ public class ReservaTestDataBuilder {
 		fechaReserva = LocalDateTime.of(2021, 7, 16, 13, 00);
 		precioNeto = 35000.0;
 		precioTotal = 35000.0;
+		cantidadServicios = 1L;
 		esReservaDeMenor = false;
+	}
+
+	public ReservaTestDataBuilder conCantidadServicios(Long cantidadServicios) {
+		this.cantidadServicios = cantidadServicios;
+		return this;
 	}
 
 	public ReservaTestDataBuilder conPrecioTotal(Double precioTotal) {
@@ -55,7 +62,8 @@ public class ReservaTestDataBuilder {
 	}
 
 	public Reserva build() {
-		return new Reserva(id, idCliente, fechaCreacion, fechaReserva, precioNeto, precioTotal, esReservaDeMenor);
+		return new Reserva(id, idCliente, fechaCreacion, fechaReserva, precioNeto, precioTotal, cantidadServicios,
+				esReservaDeMenor);
 	}
 
 }

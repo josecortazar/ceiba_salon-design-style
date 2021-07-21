@@ -17,7 +17,6 @@ import com.ceiba.dominio.excepcion.ExcepcionValorInvalido;
 import com.ceiba.dominio.excepcion.ExcepcionValorObligatorio;
 import com.ceiba.dominio.util.FechasUtil;
 
-
 public class ValidadorArgumento {
 
 	private ValidadorArgumento() {
@@ -161,6 +160,10 @@ public class ValidadorArgumento {
 			}
 		}
 		return false;
+	}
+
+	public static boolean validarDescuento(Long cantidad, Long cantidadParaDescuento) {
+		return cantidad >= cantidadParaDescuento;
 	}
 
 	public static boolean validarMenorEdad(LocalDateTime fechaNacimiento) {
