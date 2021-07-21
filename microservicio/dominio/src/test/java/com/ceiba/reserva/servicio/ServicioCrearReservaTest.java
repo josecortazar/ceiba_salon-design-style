@@ -17,6 +17,7 @@ import org.mockito.Mockito;
 import com.ceiba.BasePrueba;
 import com.ceiba.cliente.puerto.dao.DaoCliente;
 import com.ceiba.dominio.excepcion.ExcepcionDuplicidad;
+import com.ceiba.dominio.excepcion.ExcepcionNoEncontrado;
 import com.ceiba.dominio.excepcion.ExcepcionSinDatos;
 
 
@@ -73,8 +74,8 @@ public class ServicioCrearReservaTest {
 
 		ServicioCrearReserva reservaCrearReserva = new ServicioCrearReserva(repositorioReserva, daoCliente);
 		// act - assert
-		BasePrueba.assertThrows(() -> reservaCrearReserva.ejecutar(reserva), ExcepcionSinDatos.class,
-				"El cliente no existe en el sistema");
+		BasePrueba.assertThrows(() -> reservaCrearReserva.ejecutar(reserva), ExcepcionNoEncontrado.class,
+				"El cliente no se encontro en el sistema");
 	}
 
 
