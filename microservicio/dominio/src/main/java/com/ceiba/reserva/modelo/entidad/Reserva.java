@@ -69,6 +69,14 @@ public class Reserva {
 				FIN_DE_SEMANA);
 		validarCierreFestivos(fechaCreacion.toLocalDate(), FIN_DE_SEMANA);
 
+		if (precioNeto == null) {
+			precioNeto = 0.0;
+		}
+
+		if (cantidadServicios == null) {
+			cantidadServicios = 0L;
+		}
+
 		if (validarIncrementoFestivos(fechaReserva.toLocalDate())) {
 			alteracionPrecio = alteracionPrecio + INCREMENTO_FESTIVOS;
 		} else if (validarIncrementoFinesSemana(fechaReserva, DIA_SABADO, DIA_DOMINGO)) {
@@ -77,10 +85,6 @@ public class Reserva {
 
 		if (validarDescuento(cantidadServicios, CANTIDAD_PARA_DESCUENTO)) {
 			alteracionPrecio = alteracionPrecio - DESCUENTO_TRES_SERVICIOS;
-		}
-
-		if (precioNeto == null) {
-			precioNeto = 0.0;
 		}
 
 		this.id = id;
