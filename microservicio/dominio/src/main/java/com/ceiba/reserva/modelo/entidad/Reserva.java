@@ -54,7 +54,7 @@ public class Reserva {
 	private Boolean esReservaDeMenor;
 
 	public Reserva(Long id, Long idCliente, LocalDateTime fechaCreacion, LocalDateTime fechaReserva, Double precioNeto,
-			Double precioTotal, Long cantidadServicios, Boolean esReservaDeMenor) {
+			Long cantidadServicios, Boolean esReservaDeMenor) {
 
 		double alteracionPrecio = 1.0;
 

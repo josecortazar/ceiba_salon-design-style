@@ -10,8 +10,8 @@ public class FabricaReserva {
 
 	public Reserva crear(ComandoReserva comandoReserva) {
 		return new Reserva(comandoReserva.getId(), comandoReserva.getIdCliente(), comandoReserva.getFechaCreacion(),
-				comandoReserva.getFechaReserva(), comandoReserva.getPrecioNeto(), comandoReserva.getPrecioTotal(),
-				comandoReserva.getCantidadServicios(), comandoReserva.getEsReservaDeMenor());
+				comandoReserva.getFechaReserva(), comandoReserva.getPrecioNeto(), comandoReserva.getCantidadServicios(),
+				comandoReserva.getEsReservaDeMenor());
 	}
 
 }
