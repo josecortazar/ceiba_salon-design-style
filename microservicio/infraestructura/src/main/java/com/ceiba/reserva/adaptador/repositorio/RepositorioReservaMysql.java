@@ -13,9 +13,7 @@ public class RepositorioReservaMysql implements RepositorioReserva {
 
 	private final CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate;
 
-	private MapSqlParameterSource paramSource;
-
-	private static final String CAMPO_ID = "id";
+	private static final String CAMPO_ID_RESERVA = "id";
 
 	@SqlStatement(namespace = "reserva", value = "crear")
 	private static String sqlCrear;
@@ -30,7 +28,6 @@ public class RepositorioReservaMysql implements RepositorioReserva {
 	private static String sqlExiste;
 
 	public RepositorioReservaMysql(CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate) {
-		paramSource = new MapSqlParameterSource();
 		this.customNamedParameterJdbcTemplate = customNamedParameterJdbcTemplate;
 	}
 
@@ -41,14 +38,16 @@ public class RepositorioReservaMysql implements RepositorioReserva {
 
 	@Override
 	public void eliminar(Long id) {
-		paramSource.addValue(CAMPO_ID, id);
+		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+		paramSource.addValue(CAMPO_ID_RESERVA, id);
 
 		this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().update(sqlEliminar, paramSource);
 	}
 
 	@Override
 	public boolean existe(Long id) {
-		paramSource.addValue(CAMPO_ID, id);
+		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+		paramSource.addValue(CAMPO_ID_RESERVA, id);
 
 		return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlExiste,
 				paramSource, Boolean.class);

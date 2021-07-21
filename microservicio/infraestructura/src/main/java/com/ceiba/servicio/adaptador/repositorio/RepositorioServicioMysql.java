@@ -13,7 +13,7 @@ public class RepositorioServicioMysql implements RepositorioServicio {
 
 	private final CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate;
 
-	private static final String CAMPO_ID = "id";
+	private static final String CAMPO_ID_SERVICIO = "id";
 
 	@SqlStatement(namespace = "servicio", value = "crear")
 	private static String sqlCrear;
@@ -40,7 +40,7 @@ public class RepositorioServicioMysql implements RepositorioServicio {
 	@Override
 	public void eliminar(Long id) {
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
-		paramSource.addValue(CAMPO_ID, id);
+		paramSource.addValue(CAMPO_ID_SERVICIO, id);
 
 		this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().update(sqlEliminar, paramSource);
 	}
@@ -48,7 +48,7 @@ public class RepositorioServicioMysql implements RepositorioServicio {
 	@Override
 	public boolean existe(Long id) {
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
-		paramSource.addValue(CAMPO_ID, id);
+		paramSource.addValue(CAMPO_ID_SERVICIO, id);
 
 		return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlExiste,
 				paramSource, Boolean.class);
