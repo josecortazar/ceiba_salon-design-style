@@ -1,6 +1,5 @@
 package com.ceiba.reserva.servicio;
 
-import com.ceiba.dominio.excepcion.ExcepcionSinDatos;
 import com.ceiba.reserva.modelo.entidad.Reserva;
 import com.ceiba.reserva.puerto.repositorio.RepositorioReserva;
 import com.ceiba.reserva.servicio.testdatabuilder.ReservaTestDataBuilder;
@@ -9,6 +8,7 @@ import org.junit.Test;
 import org.mockito.Mockito;
 
 import com.ceiba.BasePrueba;
+import com.ceiba.dominio.excepcion.ExcepcionSinDatos;
 
 public class ServicioActualizarReservaTest {
 

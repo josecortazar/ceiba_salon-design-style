@@ -15,10 +15,18 @@ public interface DaoCliente {
 
 	/**
 	 * Permite obtener un cliente segun su identificacion
+	 * 
 	 * @param identificacion
 	 * @return
 	 */
 	DtoCliente obtener(String identificacion);
-	
-	
+
+	/**
+	 * Permite obtener un cliente segun su id
+	 * 
+	 * @param id
+	 * @return
+	 */
+	DtoCliente obtener(Long id);
+
 }

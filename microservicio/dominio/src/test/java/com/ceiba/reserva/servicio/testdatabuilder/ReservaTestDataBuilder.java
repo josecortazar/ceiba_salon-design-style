@@ -24,11 +24,6 @@ public class ReservaTestDataBuilder {
 		esReservaDeMenor = false;
 	}
 
-	public ReservaTestDataBuilder conEsReservaDeMenor(Boolean esReservaDeMenor) {
-		this.esReservaDeMenor = esReservaDeMenor;
-		return this;
-	}
-
 	public ReservaTestDataBuilder conPrecioTotal(Double precioTotal) {
 		this.precioTotal = precioTotal;
 		return this;

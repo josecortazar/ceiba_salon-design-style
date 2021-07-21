@@ -1,125 +1,90 @@
 package com.ceiba.reserva.servicio;
 
-import com.ceiba.dominio.excepcion.ExcepcionCierreFinesSemana;
-import com.ceiba.dominio.excepcion.ExcepcionDuplicidad;
-import com.ceiba.dominio.excepcion.ExcepcionFechaReserva;
-import com.ceiba.dominio.excepcion.ExcepcionHoraroReserva;
-import com.ceiba.dominio.excepcion.ExcepcionValorObligatorio;
 import com.ceiba.reserva.modelo.entidad.Reserva;
 import com.ceiba.reserva.puerto.repositorio.RepositorioReserva;
+import com.ceiba.reserva.servicio.testdatabuilder.DtoClienteTestDataBuilder;
 import com.ceiba.reserva.servicio.testdatabuilder.ReservaTestDataBuilder;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
 
 import java.time.LocalDateTime;
 
 import org.hamcrest.CoreMatchers;
+import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
 import com.ceiba.BasePrueba;
+import com.ceiba.cliente.puerto.dao.DaoCliente;
+import com.ceiba.dominio.excepcion.ExcepcionDuplicidad;
+import com.ceiba.dominio.excepcion.ExcepcionSinDatos;
+
 
 public class ServicioCrearReservaTest {
 
-	@Test
-	public void validarCampoCliente() {
+	private Reserva reserva;
+	private RepositorioReserva repositorioReserva;
+	private DtoClienteTestDataBuilder dtoClienteTestDataBuilder;
+	private DaoCliente daoCliente;
+
+	@Before
+	public void setup() {
 		// arrange
-		ReservaTestDataBuilder reservaTestDataBuilder = new ReservaTestDataBuilder().conCliente(null);
-		// act - assert
-		BasePrueba.assertThrows(() -> reservaTestDataBuilder.build(), ExcepcionValorObligatorio.class,
-				"Se debe ingresar el cliente de la reserva");
+		reserva = new ReservaTestDataBuilder().build();
+		repositorioReserva = Mockito.mock(RepositorioReserva.class);
+
+		dtoClienteTestDataBuilder = new DtoClienteTestDataBuilder();
+		daoCliente = Mockito.mock(DaoCliente.class);
+	}
+	
+	@Test
+	public void validarReservaClienteMayor() {
+		// arrange
+		Mockito.when(repositorioReserva.existe(Mockito.anyLong())).thenReturn(false);
+		dtoClienteTestDataBuilder = dtoClienteTestDataBuilder.conFechanacimiento(LocalDateTime.of(1990, 7, 16, 11, 00));
+		Mockito.when(daoCliente.obtener(Mockito.anyLong())).thenReturn(dtoClienteTestDataBuilder.build());
+
+		ServicioCrearReserva reservaCrearReserva = new ServicioCrearReserva(repositorioReserva, daoCliente);
+		// act
+		reservaCrearReserva.ejecutar(reserva);
+		// assert
+		assertThat(false, CoreMatchers.is(reserva.getEsReservaDeMenor()));
 	}
 
 	@Test
-	public void validarCampoFechaReserva() {
+	public void validarReservaClienteMenor() {
 		// arrange
-		ReservaTestDataBuilder reservaTestDataBuilder = new ReservaTestDataBuilder().conFechaReserva(null);
-		// act - assert
-		BasePrueba.assertThrows(() -> reservaTestDataBuilder.build(), ExcepcionValorObligatorio.class,
-				"Se debe ingresar una fecha para la reserva");
-	}
+		Mockito.when(repositorioReserva.existe(Mockito.anyLong())).thenReturn(false);
+		dtoClienteTestDataBuilder = dtoClienteTestDataBuilder.conFechanacimiento(LocalDateTime.of(2010, 7, 16, 11, 00));
+		Mockito.when(daoCliente.obtener(Mockito.anyLong())).thenReturn(dtoClienteTestDataBuilder.build());
 
+		ServicioCrearReserva reservaCrearReserva = new ServicioCrearReserva(repositorioReserva, daoCliente);
+		// act
+		reservaCrearReserva.ejecutar(reserva);
+		// assert
+		assertThat(true, CoreMatchers.is(reserva.getEsReservaDeMenor()));
+	}
+	
 	@Test
-	public void validarHoraReserva() {
+	public void validarReservaClienteNoRegistrado() {
 		// arrange
-		ReservaTestDataBuilder reservaTestDataBuilder = new ReservaTestDataBuilder()
-				.conFechaReserva(LocalDateTime.of(2021, 7, 16, 01, 00));
+		Mockito.when(repositorioReserva.existe(Mockito.anyLong())).thenReturn(false);
+		Mockito.when(daoCliente.obtener(Mockito.anyLong())).thenReturn(null);
 
+		ServicioCrearReserva reservaCrearReserva = new ServicioCrearReserva(repositorioReserva, daoCliente);
 		// act - assert
-		BasePrueba.assertThrows(() -> reservaTestDataBuilder.build(), ExcepcionHoraroReserva.class,
-				"El horario para asignar la reserva no es valido");
-
+		BasePrueba.assertThrows(() -> reservaCrearReserva.ejecutar(reserva), ExcepcionSinDatos.class,
+				"El cliente no existe en el sistema");
 	}
 
-	@Test
-	public void validarFechaReservaMuchaAnticipacion() {
-		// arrange
-		ReservaTestDataBuilder reservaTestDataBuilder = new ReservaTestDataBuilder()
-				.conFechaReserva(LocalDateTime.of(2023, 7, 16, 11, 00));
-
-		// act - assert
-		BasePrueba.assertThrows(() -> reservaTestDataBuilder.build(), ExcepcionFechaReserva.class,
-				"La fecha para la reserva no valida, tiene mas de 4 meses de anticipacion");
-	}
-
-	@Test
-	public void validarFechaReservaPreviamente() {
-		// arrange
-		ReservaTestDataBuilder reservaTestDataBuilder = new ReservaTestDataBuilder()
-				.conFechaCreacion(LocalDateTime.of(2021, 7, 16, 11, 00));
-		reservaTestDataBuilder.conFechaReserva(LocalDateTime.of(2021, 7, 10, 11, 00));
-		// act - assert
-		BasePrueba.assertThrows(() -> reservaTestDataBuilder.build(), ExcepcionFechaReserva.class,
-				"La fecha para la reserva no valida, no es hecha previamente");
-	}
-
-	@Test
-	public void validarCierreReservasFinesDeSemana() {
-		// arrange
-		ReservaTestDataBuilder reservaTestDataBuilder = new ReservaTestDataBuilder()
-				.conFechaCreacion(LocalDateTime.of(2021, 8, 14, 11, 00));
-		reservaTestDataBuilder.conFechaReserva(LocalDateTime.of(2021, 8, 20, 13, 00));
-
-		// act - assert
-		BasePrueba.assertThrows(() -> reservaTestDataBuilder.build(), ExcepcionCierreFinesSemana.class,
-				"La plataforma esta cerrada para reservas los fines de semana");
-	}
-
-	@Test
-	public void validarIncrementoFinesSemana() {
-		// arrange
-		ReservaTestDataBuilder reservaTestDataBuilder = new ReservaTestDataBuilder()
-				.conFechaCreacion(LocalDateTime.of(2021, 7, 21, 11, 00));
-		reservaTestDataBuilder.conFechaReserva(LocalDateTime.of(2021, 7, 25, 13, 00));
-
-		Reserva reserva = reservaTestDataBuilder.build();
-
-		// act - assert
-		assertThat((reserva.getPrecioNeto() * 1.1), CoreMatchers.is(reserva.getPrecioTotal()));
-	}
-
-	@Test
-	public void validarIncrementoFestivos() {
-		// arrange
-		ReservaTestDataBuilder reservaTestDataBuilder = new ReservaTestDataBuilder()
-				.conFechaCreacion(LocalDateTime.of(2021, 7, 16, 11, 00));
-		reservaTestDataBuilder.conFechaReserva(LocalDateTime.of(2021, 7, 20, 13, 00));
-
-		Reserva reserva = reservaTestDataBuilder.build();
-
-		// act - assert
-		assertThat((reserva.getPrecioNeto() * 1.15), CoreMatchers.is(reserva.getPrecioTotal()));
-	}
 
 	@Test
 	public void validarReservaExistenciaPreviaTest() {
 		// arrange
-		Reserva reserva = new ReservaTestDataBuilder().build();
-		RepositorioReserva repositorioReserva = Mockito.mock(RepositorioReserva.class);
 		Mockito.when(repositorioReserva.existe(Mockito.anyLong())).thenReturn(true);
-		ServicioCrearReserva reservaCrearReserva = new ServicioCrearReserva(repositorioReserva);
+		Mockito.when(daoCliente.obtener(Mockito.anyLong())).thenReturn(dtoClienteTestDataBuilder.build());
+
+		ServicioCrearReserva reservaCrearReserva = new ServicioCrearReserva(repositorioReserva, daoCliente);
 		// act - assert
 		BasePrueba.assertThrows(() -> reservaCrearReserva.ejecutar(reserva), ExcepcionDuplicidad.class,
 				"La reserva ya existe en el sistema");
@@ -128,10 +93,10 @@ public class ServicioCrearReservaTest {
 	@Test
 	public void ejecutarTodoValido() {
 		// arrange
-		Reserva reserva = new ReservaTestDataBuilder().build();
-		RepositorioReserva repositorioReserva = Mockito.mock(RepositorioReserva.class);
 		Mockito.when(repositorioReserva.existe(Mockito.anyLong())).thenReturn(false);
-		ServicioCrearReserva reservaCrearReserva = new ServicioCrearReserva(repositorioReserva);
+		Mockito.when(daoCliente.obtener(Mockito.anyLong())).thenReturn(dtoClienteTestDataBuilder.build());
+
+		ServicioCrearReserva reservaCrearReserva = new ServicioCrearReserva(repositorioReserva, daoCliente);
 		// act
 		reservaCrearReserva.ejecutar(reserva);
 		// assert

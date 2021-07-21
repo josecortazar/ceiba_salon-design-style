@@ -1,18 +1,15 @@
 package com.ceiba.cliente.servicio;
 
-import com.ceiba.dominio.excepcion.ExcepcionDuplicidad;
-import com.ceiba.dominio.excepcion.ExcepcionValorInvalido;
-
-import com.ceiba.dominio.excepcion.ExcepcionValorObligatorio;
-
 import org.junit.Test;
 import org.mockito.Mockito;
 
 import com.ceiba.BasePrueba;
 import com.ceiba.cliente.modelo.entidad.Cliente;
 import com.ceiba.cliente.puerto.repositorio.RepositorioCliente;
-import com.ceiba.cliente.servicio.ServicioCrearCliente;
 import com.ceiba.cliente.servicio.testdatabuilder.ClienteTestDataBuilder;
+import com.ceiba.dominio.excepcion.ExcepcionDuplicidad;
+import com.ceiba.dominio.excepcion.ExcepcionValorInvalido;
+import com.ceiba.dominio.excepcion.ExcepcionValorObligatorio;
 
 public class ServicioCrearClienteTest {
 

@@ -6,7 +6,7 @@ import com.ceiba.reserva.puerto.repositorio.RepositorioReserva;
 
 public class ServicioActualizarReserva {
 
-	private static final String LA_SERVICIO_NO_EXISTE_EN_EL_SISTEMA = "La reserva no existe en el sistema";
+	private static final String LA_RESERVA_NO_EXISTE_EN_EL_SISTEMA = "La reserva no existe en el sistema";
 
 	private final RepositorioReserva repositorioReserva;
 
@@ -22,7 +22,7 @@ public class ServicioActualizarReserva {
 	private void validarExistenciaPrevia(Reserva reserva) {
 		boolean existe = this.repositorioReserva.existe(reserva.getId());
 		if (!existe) {
-			throw new ExcepcionSinDatos(LA_SERVICIO_NO_EXISTE_EN_EL_SISTEMA);
+			throw new ExcepcionSinDatos(LA_RESERVA_NO_EXISTE_EN_EL_SISTEMA);
 		}
 	}
 }

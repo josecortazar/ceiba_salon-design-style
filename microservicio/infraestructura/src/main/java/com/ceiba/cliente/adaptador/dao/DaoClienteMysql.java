@@ -19,7 +19,10 @@ public class DaoClienteMysql implements DaoCliente {
 	private static String sqlListar;
 
 	@SqlStatement(namespace = "cliente", value = "obtener")
-	private static String sqlObtener;
+	private static String sqlObtenerIdentificacion;
+
+	@SqlStatement(namespace = "cliente", value = "obtenerid")
+	private static String sqlObtenerId;
 
 	public DaoClienteMysql(CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate) {
 		this.customNamedParameterJdbcTemplate = customNamedParameterJdbcTemplate;
@@ -36,7 +39,15 @@ public class DaoClienteMysql implements DaoCliente {
 		MapSqlParameterSource parametro = new MapSqlParameterSource();
 		parametro.addValue("identificacion", identificacion);
 		return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate()
-				.query(sqlObtener, parametro, new MapeoCliente()).iterator().next();
+				.query(sqlObtenerIdentificacion, parametro, new MapeoCliente()).iterator().next();
 	}
 
+	@Override
+	public DtoCliente obtener(Long id) {
+		System.out.println(sqlObtenerId);
+		MapSqlParameterSource parametro = new MapSqlParameterSource();
+		parametro.addValue("id", id);
+		return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate()
+				.query(sqlObtenerId, parametro, new MapeoCliente()).iterator().next();
+	}
 }

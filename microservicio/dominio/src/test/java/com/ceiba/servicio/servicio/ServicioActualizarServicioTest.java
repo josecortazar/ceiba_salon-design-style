@@ -1,6 +1,5 @@
 package com.ceiba.servicio.servicio;
 
-import com.ceiba.dominio.excepcion.ExcepcionSinDatos;
 import com.ceiba.servicio.modelo.entidad.Servicio;
 import com.ceiba.servicio.puerto.repositorio.RepositorioServicio;
 import com.ceiba.servicio.servicio.testdatabuilder.ServicioTestDataBuilder;
@@ -9,6 +8,7 @@ import org.junit.Test;
 import org.mockito.Mockito;
 
 import com.ceiba.BasePrueba;
+import com.ceiba.dominio.excepcion.ExcepcionSinDatos;
 
 public class ServicioActualizarServicioTest {
 
