@@ -12,7 +12,9 @@ import org.springframework.stereotype.Repository;
 public class RepositorioServicioMysql implements RepositorioServicio {
 
 	private final CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate;
-	
+
+	private MapSqlParameterSource paramSource;
+
 	private static final String CAMPO_ID = "id";
 
 	@SqlStatement(namespace = "servicio", value = "crear")
@@ -28,6 +30,7 @@ public class RepositorioServicioMysql implements RepositorioServicio {
 	private static String sqlExiste;
 
 	public RepositorioServicioMysql(CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate) {
+		paramSource = new MapSqlParameterSource();
 		this.customNamedParameterJdbcTemplate = customNamedParameterJdbcTemplate;
 	}
 
@@ -38,7 +41,6 @@ public class RepositorioServicioMysql implements RepositorioServicio {
 
 	@Override
 	public void eliminar(Long id) {
-		MapSqlParameterSource paramSource = new MapSqlParameterSource();
 		paramSource.addValue(CAMPO_ID, id);
 
 		this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().update(sqlEliminar, paramSource);
@@ -46,7 +48,7 @@ public class RepositorioServicioMysql implements RepositorioServicio {
 
 	@Override
 	public boolean existe(Long id) {
-		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+
 		paramSource.addValue(CAMPO_ID, id);
 
 		return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlExiste,
