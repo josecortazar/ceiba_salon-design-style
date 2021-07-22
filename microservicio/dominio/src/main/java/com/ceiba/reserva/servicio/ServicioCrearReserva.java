@@ -2,7 +2,7 @@ package com.ceiba.reserva.servicio;
 
 import com.ceiba.cliente.puerto.dao.DaoCliente;
 import com.ceiba.dominio.excepcion.ExcepcionDuplicidad;
-import com.ceiba.dominio.excepcion.ExcepcionNoEncontrado;
+import com.ceiba.dominio.excepcion.ExcepcionSinDatos;
 
 import static com.ceiba.reserva.validador.ValidadorReserva.validarMenorEdad;
 
@@ -44,7 +44,7 @@ public class ServicioCrearReserva {
 			return validarMenorEdad(daoCliente.obtener(reserva.getIdCliente()).getFechaNacimiento());
 		} catch (NullPointerException e) {
 			LOGGER.info(EL_CLIENTE_NO_SE_ENCONTRO_EN_EL_SISTEMA + e.getMessage());
-			throw new ExcepcionNoEncontrado(EL_CLIENTE_NO_SE_ENCONTRO_EN_EL_SISTEMA);
+			throw new ExcepcionSinDatos(EL_CLIENTE_NO_SE_ENCONTRO_EN_EL_SISTEMA);
 		}
 	}
 

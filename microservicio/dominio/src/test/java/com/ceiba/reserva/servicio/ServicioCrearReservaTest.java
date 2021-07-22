@@ -74,7 +74,7 @@ public class ServicioCrearReservaTest {
 
 		ServicioCrearReserva reservaCrearReserva = new ServicioCrearReserva(repositorioReserva, daoCliente);
 		// act - assert
-		BasePrueba.assertThrows(() -> reservaCrearReserva.ejecutar(reserva), ExcepcionNoEncontrado.class,
+		BasePrueba.assertThrows(() -> reservaCrearReserva.ejecutar(reserva), ExcepcionSinDatos.class,
 				"El cliente no se encontro en el sistema");
 	}
 
