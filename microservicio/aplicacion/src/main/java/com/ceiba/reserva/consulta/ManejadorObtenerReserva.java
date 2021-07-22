@@ -2,7 +2,7 @@ package com.ceiba.reserva.consulta;
 
 import org.springframework.stereotype.Component;
 
-import com.ceiba.excepcion.ExcepcionSinDatos;
+import com.ceiba.dominio.excepcion.ExcepcionSinDatos;
 import com.ceiba.reserva.modelo.dto.DtoReserva;
 import com.ceiba.reserva.puerto.dao.DaoReserva;
 

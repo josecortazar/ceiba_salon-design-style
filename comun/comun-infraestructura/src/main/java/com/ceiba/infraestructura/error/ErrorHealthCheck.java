@@ -5,8 +5,6 @@ public class ErrorHealthCheck {
 	
 	private String nombre;
 	private String estado;
-
-	
 	
 	public ErrorHealthCheck(String nombre) {
 		this.nombre = nombre;
@@ -29,8 +27,4 @@ public class ErrorHealthCheck {
 		this.estado = estado;
 	}
 	
-	
-	
-	
-
 }

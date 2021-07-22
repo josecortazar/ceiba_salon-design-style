@@ -11,9 +11,8 @@ import org.hamcrest.CoreMatchers;
 import org.junit.Test;
 
 import com.ceiba.BasePrueba;
-import com.ceiba.dominio.excepcion.ExcepcionCierreFinesSemana;
-import com.ceiba.dominio.excepcion.ExcepcionFechaReserva;
-import com.ceiba.dominio.excepcion.ExcepcionHoraroReserva;
+import com.ceiba.dominio.excepcion.ExcepcionAccionInvalida;
+import com.ceiba.dominio.excepcion.ExcepcionValorInvalido;
 import com.ceiba.dominio.excepcion.ExcepcionValorObligatorio;
 
 public class ReservaTest {
@@ -43,7 +42,7 @@ public class ReservaTest {
 				.conFechaReserva(LocalDateTime.of(2021, 7, 16, 01, 00));
 
 		// act - assert
-		BasePrueba.assertThrows(() -> reservaTestDataBuilder.build(), ExcepcionHoraroReserva.class,
+		BasePrueba.assertThrows(() -> reservaTestDataBuilder.build(), ExcepcionValorInvalido.class,
 				"El horario para asignar la reserva no es valido");
 
 	}
@@ -55,7 +54,7 @@ public class ReservaTest {
 				.conFechaReserva(LocalDateTime.of(2023, 7, 16, 11, 00));
 
 		// act - assert
-		BasePrueba.assertThrows(() -> reservaTestDataBuilder.build(), ExcepcionFechaReserva.class,
+		BasePrueba.assertThrows(() -> reservaTestDataBuilder.build(), ExcepcionValorInvalido.class,
 				"La fecha para la reserva no valida, tiene mas de 4 meses de anticipacion");
 	}
 
@@ -66,7 +65,7 @@ public class ReservaTest {
 				.conFechaCreacion(LocalDateTime.of(2021, 7, 16, 11, 00));
 		reservaTestDataBuilder.conFechaReserva(LocalDateTime.of(2021, 7, 10, 11, 00));
 		// act - assert
-		BasePrueba.assertThrows(() -> reservaTestDataBuilder.build(), ExcepcionFechaReserva.class,
+		BasePrueba.assertThrows(() -> reservaTestDataBuilder.build(), ExcepcionValorInvalido.class,
 				"La fecha para la reserva no valida, no es hecha previamente");
 	}
 
@@ -78,7 +77,7 @@ public class ReservaTest {
 		reservaTestDataBuilder.conFechaReserva(LocalDateTime.of(2021, 8, 20, 13, 00));
 
 		// act - assert
-		BasePrueba.assertThrows(() -> reservaTestDataBuilder.build(), ExcepcionCierreFinesSemana.class,
+		BasePrueba.assertThrows(() -> reservaTestDataBuilder.build(), ExcepcionAccionInvalida.class,
 				"La plataforma esta cerrada para reservas los fines de semana");
 	}
 
@@ -131,7 +130,7 @@ public class ReservaTest {
 		// act - assert
 		assertThat(reserva.getPrecioTotal(), CoreMatchers.is(reserva.getPrecioNeto() * ((1.0 + 0.15) - 0.1)));
 	}
-	
+
 	@Test
 	public void validarIncrementoDomingoConDescuento() {
 		// arrange

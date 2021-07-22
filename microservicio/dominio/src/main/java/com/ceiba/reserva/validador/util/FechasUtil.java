@@ -1,8 +1,12 @@
-package com.ceiba.dominio.util;
+package com.ceiba.reserva.validador.util;
 
 import java.time.LocalDate;
 
 public class FechasUtil {
+
+	private FechasUtil() {
+
+	}
 
 	public static final LocalDate[] DIAS_FESTIVOS_COLOMBIA = { LocalDate.of(2021, 1, 1), LocalDate.of(2021, 1, 11),
 			LocalDate.of(2021, 3, 22), LocalDate.of(2021, 4, 1), LocalDate.of(2021, 4, 2), LocalDate.of(2021, 5, 1),

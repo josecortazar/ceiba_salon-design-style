@@ -67,7 +67,7 @@ public class ServicioCrearReservaTest {
 	}
 	
 	@Test
-	public void validarReservaClienteNoRegistrado() {
+	public void validarReservaClienteNoRegistradoEnSistema() {
 		// arrange
 		Mockito.when(repositorioReserva.existe(Mockito.anyLong())).thenReturn(false);
 		Mockito.when(daoCliente.obtener(Mockito.anyLong())).thenReturn(null);

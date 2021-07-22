@@ -38,5 +38,4 @@ public class ConsultaControladorReservaTest {
 		mocMvc.perform(get("/reservas/1").contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
 				.andExpect(jsonPath("idCliente", is(1)));
 	}
-
 }

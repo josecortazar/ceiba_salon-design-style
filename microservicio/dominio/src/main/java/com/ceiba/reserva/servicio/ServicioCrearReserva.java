@@ -4,7 +4,7 @@ import com.ceiba.cliente.puerto.dao.DaoCliente;
 import com.ceiba.dominio.excepcion.ExcepcionDuplicidad;
 import com.ceiba.dominio.excepcion.ExcepcionNoEncontrado;
 
-import static com.ceiba.dominio.ValidadorArgumento.validarMenorEdad;
+import static com.ceiba.reserva.validador.ValidadorReserva.validarMenorEdad;
 
 import java.util.logging.Logger;
 
