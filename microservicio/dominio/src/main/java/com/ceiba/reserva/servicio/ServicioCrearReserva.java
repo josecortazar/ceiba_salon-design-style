@@ -42,7 +42,7 @@ public class ServicioCrearReserva {
 	private boolean esClienteMenor(Reserva reserva) {
 		try {
 			return validarMenorEdad(daoCliente.obtener(reserva.getIdCliente()).getFechaNacimiento());
-		} catch (Exception e) {
+		} catch (NullPointerException e) {
 			LOGGER.info(EL_CLIENTE_NO_SE_ENCONTRO_EN_EL_SISTEMA + e.getMessage());
 			throw new ExcepcionNoEncontrado(EL_CLIENTE_NO_SE_ENCONTRO_EN_EL_SISTEMA);
 		}

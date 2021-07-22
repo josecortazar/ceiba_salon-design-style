@@ -9,7 +9,7 @@ import com.ceiba.dominio.excepcion.ExcepcionValorInvalido;
 
 import static com.ceiba.reserva.validador.util.FechasUtil.DIAS_FESTIVOS_COLOMBIA;
 
-public class ValidadorReserva {
+public final class ValidadorReserva {
 
 	private ValidadorReserva() {
 	}
