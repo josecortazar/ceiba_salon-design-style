@@ -2,7 +2,7 @@ package com.ceiba.servicio.consulta;
 
 import org.springframework.stereotype.Component;
 
-import com.ceiba.dominio.excepcion.ExcepcionSinDatos;
+import com.ceiba.aplicacion.excepcion.ExcepcionSinDatos;
 import com.ceiba.servicio.modelo.dto.DtoServicio;
 import com.ceiba.servicio.puerto.dao.DaoServicio;
 
