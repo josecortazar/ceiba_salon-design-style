@@ -2,13 +2,9 @@ package com.ceiba.reserva.servicio;
 
 import com.ceiba.cliente.puerto.dao.DaoCliente;
 import com.ceiba.dominio.excepcion.ExcepcionDuplicidad;
-import com.ceiba.dominio.excepcion.ExcepcionSinDatos;
 
-import static com.ceiba.dominio.ValidadorArgumento.validarExistencia;
 import static com.ceiba.reserva.validador.ValidadorReserva.validarMenorEdad;
 
-import java.util.NoSuchElementException;
-import java.util.logging.Logger;
 import com.ceiba.reserva.modelo.entidad.Reserva;
 import com.ceiba.reserva.puerto.repositorio.RepositorioReserva;
 
@@ -19,8 +15,6 @@ public class ServicioCrearReserva {
 
 	private final RepositorioReserva repositorioReserva;
 	private final DaoCliente daoCliente;
-
-	private static final Logger LOGGER = Logger.getLogger(ServicioCrearReserva.class.getName());
 
 	public ServicioCrearReserva(RepositorioReserva repositorioReserva, DaoCliente daoCliente) {
 		this.repositorioReserva = repositorioReserva;
@@ -41,12 +35,13 @@ public class ServicioCrearReserva {
 	}
 
 	private boolean esClienteMenor(Reserva reserva) {
+
 		try {
 			return validarMenorEdad(daoCliente.obtener(reserva.getIdCliente()).getFechaNacimiento());
-		} catch (NoSuchElementException e) {
-			LOGGER.info(EL_CLIENTE_NO_SE_ENCONTRO_EN_EL_SISTEMA + " " + e.getMessage());
-			throw new ExcepcionSinDatos(EL_CLIENTE_NO_SE_ENCONTRO_EN_EL_SISTEMA);
+		} catch (Exception e) { 
+			throw new ExcepcionDuplicidad(EL_CLIENTE_NO_SE_ENCONTRO_EN_EL_SISTEMA);
 		}
+		
 	}
 
 }
