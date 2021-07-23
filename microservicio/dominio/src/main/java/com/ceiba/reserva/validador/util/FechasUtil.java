@@ -8,7 +8,7 @@ public final class FechasUtil {
 
 	}
 
-	public static LocalDate[] DIAS_FESTIVOS_COLOMBIA = { LocalDate.of(2021, 1, 1), LocalDate.of(2021, 1, 11),
+	public static final LocalDate[] DIAS_FESTIVOS_COLOMBIA = { LocalDate.of(2021, 1, 1), LocalDate.of(2021, 1, 11),
 			LocalDate.of(2021, 3, 22), LocalDate.of(2021, 4, 1), LocalDate.of(2021, 4, 2), LocalDate.of(2021, 5, 1),
 			LocalDate.of(2021, 5, 17), LocalDate.of(2021, 6, 7), LocalDate.of(2021, 6, 14), LocalDate.of(2021, 7, 5),
 			LocalDate.of(2021, 7, 20), LocalDate.of(2021, 8, 7), LocalDate.of(2021, 8, 16), LocalDate.of(2021, 10, 18),
