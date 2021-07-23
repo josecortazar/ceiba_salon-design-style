@@ -4,7 +4,6 @@ import com.ceiba.dominio.excepcion.ExcepcionDuplicidad;
 import com.ceiba.itemreserva.modelo.entidad.ItemReserva;
 import com.ceiba.itemreserva.puerto.repositorio.RepositorioItemReserva;
 import com.ceiba.reserva.puerto.dao.DaoReserva;
-import com.ceiba.servicio.modelo.dto.DtoServicio;
 import com.ceiba.servicio.puerto.dao.DaoServicio;
 
 import static com.ceiba.dominio.ValidadorArgumento.validarExistencia;
@@ -29,7 +28,9 @@ public class ServicioCrearItemReserva {
 	public Long ejecutar(ItemReserva itemReserva) {
 		validarExistenciaPrevia(itemReserva);
 		validarReservaExistenciaPrevia(itemReserva);
-		itemReserva = validarServicioExistenciaPrevia(itemReserva);
+		validarExistencia(daoServicio.obtener(itemReserva.getIdServicio()), EL_SERVICIO_NO_SE_ENCONTRO_EN_EL_SISTEMA);
+		itemReserva.setNombre(obtenerNombreServicio(itemReserva));
+		itemReserva.setValor(obtenerValorServicio(itemReserva));
 		return this.repositorioItemReserva.crear(itemReserva);
 	}
 
@@ -44,15 +45,12 @@ public class ServicioCrearItemReserva {
 		validarExistencia(daoReserva.obtener(itemReserva.getIdReserva()), LA_RESERVA_NO_SE_ENCONTRO_EN_EL_SISTEMA);
 	}
 
-	private ItemReserva validarServicioExistenciaPrevia(ItemReserva itemReserva) {
+	private String obtenerNombreServicio(ItemReserva itemReserva) {
+		return daoServicio.obtener(itemReserva.getIdServicio()).getNombre();
+	}
 
-		DtoServicio dtoServicio = daoServicio.obtener(itemReserva.getIdServicio());
-		validarExistencia(dtoServicio, EL_SERVICIO_NO_SE_ENCONTRO_EN_EL_SISTEMA);
-
-		itemReserva.setNombre(dtoServicio.getNombre());
-		itemReserva.setValor(dtoServicio.getValor());
-
-		return itemReserva;
+	private Double obtenerValorServicio(ItemReserva itemReserva) {
+		return daoServicio.obtener(itemReserva.getIdServicio()).getValor();
 	}
 
 }

@@ -4,15 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import static com.ceiba.dominio.ValidadorArgumento.validarObligatorio;
-import static com.ceiba.reserva.validador.ValidadorReserva.validarCierreFinesDeSemana;
-import static com.ceiba.reserva.validador.ValidadorReserva.validarCierreFestivos;
-import static com.ceiba.reserva.validador.ValidadorReserva.validarFechaReserva;
-import static com.ceiba.reserva.validador.ValidadorReserva.validarHorarioReserva;
-import static com.ceiba.reserva.validador.ValidadorReserva.validarIncrementoFinesSemana;
-import static com.ceiba.reserva.validador.ValidadorReserva.validarIncrementoFestivos;
-import static com.ceiba.reserva.validador.ValidadorReserva.validarDescuento;
-
-import java.time.LocalDateTime;
 
 @Setter
 @Getter
