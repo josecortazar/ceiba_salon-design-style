@@ -5,10 +5,16 @@ import com.ceiba.cliente.puerto.repositorio.RepositorioCliente;
 import com.ceiba.cliente.servicio.ServicioActualizarCliente;
 import com.ceiba.cliente.servicio.ServicioCrearCliente;
 import com.ceiba.cliente.servicio.ServicioEliminarCliente;
+import com.ceiba.itemreserva.puerto.repositorio.RepositorioItemReserva;
+import com.ceiba.itemreserva.servicio.ServicioActualizarItemReserva;
+import com.ceiba.itemreserva.servicio.ServicioCrearItemReserva;
+import com.ceiba.itemreserva.servicio.ServicioEliminarItemReserva;
+import com.ceiba.reserva.puerto.dao.DaoReserva;
 import com.ceiba.reserva.puerto.repositorio.RepositorioReserva;
 import com.ceiba.reserva.servicio.ServicioActualizarReserva;
 import com.ceiba.reserva.servicio.ServicioCrearReserva;
 import com.ceiba.reserva.servicio.ServicioEliminarReserva;
+import com.ceiba.servicio.puerto.dao.DaoServicio;
 import com.ceiba.servicio.puerto.repositorio.RepositorioServicio;
 import com.ceiba.servicio.servicio.ServicioActualizarServicio;
 import com.ceiba.servicio.servicio.ServicioCrearServicio;
@@ -78,7 +84,23 @@ public class BeanServicio {
 	}
 
 	/**
-	 * Servicios
+	 * ItemReservas
 	 */
+
+	@Bean
+	public ServicioCrearItemReserva servicioCrearItemReserva(RepositorioItemReserva repositorioItemReserva,
+			DaoReserva daoReserva, DaoServicio daoServicio) {
+		return new ServicioCrearItemReserva(repositorioItemReserva, daoReserva, daoServicio);
+	}
+
+	@Bean
+	public ServicioEliminarItemReserva servicioEliminarItemReserva(RepositorioItemReserva repositorioItemReserva) {
+		return new ServicioEliminarItemReserva(repositorioItemReserva);
+	}
+
+	@Bean
+	public ServicioActualizarItemReserva servicioActualizarItemReserva(RepositorioItemReserva repositorioItemReserva) {
+		return new ServicioActualizarItemReserva(repositorioItemReserva);
+	}
 
 }

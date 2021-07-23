@@ -1,12 +1,11 @@
 package com.ceiba.itemreserva.servicio;
 
 import com.ceiba.dominio.excepcion.ExcepcionDuplicidad;
+import com.ceiba.dominio.excepcion.ExcepcionSinDatos;
 import com.ceiba.itemreserva.modelo.entidad.ItemReserva;
 import com.ceiba.itemreserva.puerto.repositorio.RepositorioItemReserva;
 import com.ceiba.reserva.puerto.dao.DaoReserva;
 import com.ceiba.servicio.puerto.dao.DaoServicio;
-
-import static com.ceiba.dominio.ValidadorArgumento.validarExistencia;
 
 public class ServicioCrearItemReserva {
 
@@ -28,17 +27,13 @@ public class ServicioCrearItemReserva {
 	public Long ejecutar(ItemReserva itemReserva) {
 		validarExistenciaPrevia(itemReserva);
 
-		// Valida que exista una reserva con el id indicado
-		validarExistencia(daoReserva.obtener(itemReserva.getIdReserva()), LA_RESERVA_NO_SE_ENCONTRO_EN_EL_SISTEMA);
+		validarReserva(itemReserva);
 
-		// Valida que exista un servicio con el id indicado
-		validarExistencia(daoServicio.obtener(itemReserva.getIdServicio()), EL_SERVICIO_NO_SE_ENCONTRO_EN_EL_SISTEMA);
+		// Segun el id del servicio, se validada y se obtiene el nombre
+		itemReserva.setNombre(asignarNombre(itemReserva));
 
-		// Segun el id del servicio validado se obtiene el nombre
-		itemReserva.setNombre(daoServicio.obtener(itemReserva.getIdServicio()).getNombre());
-
-		// Segun el id del servicio validado se obtiene el valor
-		itemReserva.setValor(daoServicio.obtener(itemReserva.getIdServicio()).getValor());
+		// Segun el id del servicio, se validada y se obtiene el valor
+		itemReserva.setValor(asignarValor(itemReserva));
 
 		return this.repositorioItemReserva.crear(itemReserva);
 	}
@@ -47,6 +42,31 @@ public class ServicioCrearItemReserva {
 		boolean existe = this.repositorioItemReserva.existe(itemReserva.getId());
 		if (existe) {
 			throw new ExcepcionDuplicidad(EL_ITEM_DE_LA_RESERVA_YA_EXISTE_EN_EL_SISTEMA);
+		}
+	}
+
+	private void validarReserva(ItemReserva itemReserva) {
+		try {
+			daoReserva.obtener(itemReserva.getIdReserva()).getId();
+		} catch (Exception e) {
+			throw new ExcepcionSinDatos(LA_RESERVA_NO_SE_ENCONTRO_EN_EL_SISTEMA);
+		}
+
+	}
+
+	private String asignarNombre(ItemReserva itemReserva) {
+		try {
+			return daoServicio.obtener(itemReserva.getIdServicio()).getNombre();
+		} catch (Exception e) {
+			throw new ExcepcionSinDatos(EL_SERVICIO_NO_SE_ENCONTRO_EN_EL_SISTEMA);
+		}
+	}
+
+	private Double asignarValor(ItemReserva itemReserva) {
+		try {
+			return daoServicio.obtener(itemReserva.getIdServicio()).getValor();
+		} catch (Exception e) {
+			throw new ExcepcionSinDatos(EL_SERVICIO_NO_SE_ENCONTRO_EN_EL_SISTEMA);
 		}
 	}
 

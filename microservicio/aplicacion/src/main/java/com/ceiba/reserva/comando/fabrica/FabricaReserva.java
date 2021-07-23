@@ -9,9 +9,15 @@ import com.ceiba.reserva.modelo.entidad.Reserva;
 public class FabricaReserva {
 
 	public Reserva crear(ComandoReserva comandoReserva) {
-		return new Reserva(comandoReserva.getId(), comandoReserva.getIdCliente(), comandoReserva.getFechaCreacion(),
-				comandoReserva.getFechaReserva(), comandoReserva.getPrecioNeto(), comandoReserva.getCantidadServicios(),
-				comandoReserva.getEsReservaDeMenor());
+		return new Reserva(
+				comandoReserva.getId(), 
+				comandoReserva.getIdCliente(), 
+				comandoReserva.getFechaCreacion(),
+				comandoReserva.getFechaReserva(), 
+				comandoReserva.getPrecioNeto(), 
+				comandoReserva.getCantidadServicios(),
+				comandoReserva.getEsReservaDeMenor()
+		);
 	}
 
 }
