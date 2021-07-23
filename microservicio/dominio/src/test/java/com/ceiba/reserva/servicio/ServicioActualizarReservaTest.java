@@ -18,10 +18,10 @@ public class ServicioActualizarReservaTest {
 		Reserva reserva = new ReservaTestDataBuilder().conId(2L).build();
 		RepositorioReserva repositorioReserva = Mockito.mock(RepositorioReserva.class);
 		Mockito.when(repositorioReserva.existe(Mockito.anyLong())).thenReturn(false);
-		ServicioActualizarReserva reservaActualizarReserva = new ServicioActualizarReserva(repositorioReserva);
+		ServicioActualizarReserva servicioActualizarReserva = new ServicioActualizarReserva(repositorioReserva);
 
 		// act - assert
-		BasePrueba.assertThrows(() -> reservaActualizarReserva.ejecutar(reserva), ExcepcionSinDatos.class,
+		BasePrueba.assertThrows(() -> servicioActualizarReserva.ejecutar(reserva), ExcepcionSinDatos.class,
 				"La reserva no existe en el sistema");
 	}
 
@@ -31,14 +31,14 @@ public class ServicioActualizarReservaTest {
 		Reserva reserva = new ReservaTestDataBuilder().build();
 		RepositorioReserva repositorioReserva = Mockito.mock(RepositorioReserva.class);
 		Mockito.when(repositorioReserva.existe(Mockito.anyLong())).thenReturn(true);
-		ServicioActualizarReserva reservaActualizarReserva = new ServicioActualizarReserva(repositorioReserva);
+		ServicioActualizarReserva servicioActualizarReserva = new ServicioActualizarReserva(repositorioReserva);
 
 		// act
-		reservaActualizarReserva.ejecutar(reserva);
+		servicioActualizarReserva.ejecutar(reserva);
 
 		// assert
 		Mockito.verify(repositorioReserva).actualizar(reserva);
 
 	}
-	
+
 }

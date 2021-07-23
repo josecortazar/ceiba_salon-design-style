@@ -12,7 +12,7 @@ public class ServicioEliminarServicioTest {
 	@Test
 	public void ejecutarTodoValido() {
 		// arrange
-		Servicio servicio = new ServicioTestDataBuilder().conId(1L).build();
+		Servicio servicio = new ServicioTestDataBuilder().build();
 		RepositorioServicio repositorioServicio = Mockito.spy(RepositorioServicio.class);
 		Mockito.doNothing().when(repositorioServicio).eliminar(Mockito.anyLong());
 		ServicioEliminarServicio servicioEliminarServicio = new ServicioEliminarServicio(repositorioServicio);

@@ -12,13 +12,13 @@ public class ServicioEliminarReservaTest {
 	@Test
 	public void ejecutarTodoValido() {
 		// arrange
-		Reserva reserva = new ReservaTestDataBuilder().conId(1L).build();
+		Reserva reserva = new ReservaTestDataBuilder().build();
 		RepositorioReserva repositorioReserva = Mockito.spy(RepositorioReserva.class);
 		Mockito.doNothing().when(repositorioReserva).eliminar(Mockito.anyLong());
-		ServicioEliminarReserva reservaEliminarReserva = new ServicioEliminarReserva(repositorioReserva);
+		ServicioEliminarReserva servicioEliminarReserva = new ServicioEliminarReserva(repositorioReserva);
 
 		// act
-		reservaEliminarReserva.ejecutar(reserva.getId());
+		servicioEliminarReserva.ejecutar(reserva.getId());
 
 		// assert
 		Mockito.verify(repositorioReserva).eliminar(reserva.getId());
