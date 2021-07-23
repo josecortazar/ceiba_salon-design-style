@@ -7,7 +7,7 @@ import java.time.temporal.ChronoUnit;
 import com.ceiba.dominio.excepcion.ExcepcionAccionInvalida;
 import com.ceiba.dominio.excepcion.ExcepcionValorInvalido;
 
-import static com.ceiba.reserva.validador.util.FechasUtil.DIAS_FESTIVOS_COLOMBIA;
+import com.ceiba.reserva.validador.util.FechasUtil;
 
 public final class ValidadorReserva {
 
@@ -52,8 +52,8 @@ public final class ValidadorReserva {
 
 	public static void validarCierreFestivos(LocalDate fechaTCreacion, String mensaje) {
 
-		for (int i = 0; i < DIAS_FESTIVOS_COLOMBIA.length; i++) {
-			if (DIAS_FESTIVOS_COLOMBIA[i].equals(fechaTCreacion)) {
+		for (int i = 0; i < FechasUtil.diasFestivosColombia.length; i++) {
+			if (FechasUtil.diasFestivosColombia[i].equals(fechaTCreacion)) {
 				throw new ExcepcionAccionInvalida(mensaje);
 			}
 		}
@@ -66,8 +66,8 @@ public final class ValidadorReserva {
 	}
 
 	public static boolean validarIncrementoFestivos(LocalDate fechaTReserva) {
-		for (int i = 0; i < DIAS_FESTIVOS_COLOMBIA.length; i++) {
-			if (DIAS_FESTIVOS_COLOMBIA[i].equals(fechaTReserva)) {
+		for (int i = 0; i < FechasUtil.diasFestivosColombia.length; i++) {
+			if (FechasUtil.diasFestivosColombia[i].equals(fechaTReserva)) {
 				return true;
 			}
 		}
