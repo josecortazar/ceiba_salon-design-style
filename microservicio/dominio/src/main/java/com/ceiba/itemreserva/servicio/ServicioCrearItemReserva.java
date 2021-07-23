@@ -27,10 +27,19 @@ public class ServicioCrearItemReserva {
 
 	public Long ejecutar(ItemReserva itemReserva) {
 		validarExistenciaPrevia(itemReserva);
-		validarReservaExistenciaPrevia(itemReserva);
+
+		// Valida que exista una reserva con el id indicado
+		validarExistencia(daoReserva.obtener(itemReserva.getIdReserva()), LA_RESERVA_NO_SE_ENCONTRO_EN_EL_SISTEMA);
+
+		// Valida que exista un servicio con el id indicado
 		validarExistencia(daoServicio.obtener(itemReserva.getIdServicio()), EL_SERVICIO_NO_SE_ENCONTRO_EN_EL_SISTEMA);
-		itemReserva.setNombre(obtenerNombreServicio(itemReserva));
-		itemReserva.setValor(obtenerValorServicio(itemReserva));
+
+		// Segun el id del servicio validado se obtiene el nombre
+		itemReserva.setNombre(daoServicio.obtener(itemReserva.getIdServicio()).getNombre());
+
+		// Segun el id del servicio validado se obtiene el valor
+		itemReserva.setValor(daoServicio.obtener(itemReserva.getIdServicio()).getValor());
+
 		return this.repositorioItemReserva.crear(itemReserva);
 	}
 
@@ -39,18 +48,6 @@ public class ServicioCrearItemReserva {
 		if (existe) {
 			throw new ExcepcionDuplicidad(EL_ITEM_DE_LA_RESERVA_YA_EXISTE_EN_EL_SISTEMA);
 		}
-	}
-
-	private void validarReservaExistenciaPrevia(ItemReserva itemReserva) {
-		validarExistencia(daoReserva.obtener(itemReserva.getIdReserva()), LA_RESERVA_NO_SE_ENCONTRO_EN_EL_SISTEMA);
-	}
-
-	private String obtenerNombreServicio(ItemReserva itemReserva) {
-		return daoServicio.obtener(itemReserva.getIdServicio()).getNombre();
-	}
-
-	private Double obtenerValorServicio(ItemReserva itemReserva) {
-		return daoServicio.obtener(itemReserva.getIdServicio()).getValor();
 	}
 
 }
