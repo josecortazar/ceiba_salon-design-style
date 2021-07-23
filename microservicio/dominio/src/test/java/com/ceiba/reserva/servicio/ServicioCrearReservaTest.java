@@ -17,7 +17,6 @@ import org.mockito.Mockito;
 import com.ceiba.BasePrueba;
 import com.ceiba.cliente.puerto.dao.DaoCliente;
 import com.ceiba.dominio.excepcion.ExcepcionDuplicidad;
-import com.ceiba.dominio.excepcion.ExcepcionNoEncontrado;
 import com.ceiba.dominio.excepcion.ExcepcionSinDatos;
 
 

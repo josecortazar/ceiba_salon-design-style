@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 
 
 import com.ceiba.dominio.excepcion.ExcepcionLongitudValor;
+import com.ceiba.dominio.excepcion.ExcepcionSinDatos;
 import com.ceiba.dominio.excepcion.ExcepcionValorInvalido;
 import com.ceiba.dominio.excepcion.ExcepcionValorObligatorio;
 
@@ -20,6 +21,12 @@ public class ValidadorArgumento {
 	public static void validarObligatorio(Object valor, String mensaje) {
 		if (valor == null) {
 			throw new ExcepcionValorObligatorio(mensaje);
+		}
+	}
+	
+	public static void validarExistencia(Object valor, String mensaje) {
+		if (valor == null) {
+			throw new ExcepcionSinDatos(mensaje);
 		}
 	}
 

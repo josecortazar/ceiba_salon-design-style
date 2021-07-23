@@ -8,7 +8,6 @@ import com.ceiba.dominio.excepcion.ExcepcionLongitudValor;
 import com.ceiba.dominio.excepcion.ExcepcionSinDatos;
 import com.ceiba.dominio.excepcion.ExcepcionValorInvalido;
 import com.ceiba.dominio.excepcion.ExcepcionValorObligatorio;
-import com.ceiba.dominio.excepcion.ExcepcionNoEncontrado;
 
 import com.ceiba.infraestructura.excepcion.ExcepcionTecnica;
 import org.slf4j.Logger;
@@ -32,7 +31,6 @@ public class ManejadorError extends ResponseEntityExceptionHandler {
 		CODIGOS_ESTADO.put(ExcepcionLongitudValor.class.getSimpleName(), HttpStatus.BAD_REQUEST.value());
 		CODIGOS_ESTADO.put(ExcepcionValorInvalido.class.getSimpleName(), HttpStatus.BAD_REQUEST.value());
 		CODIGOS_ESTADO.put(ExcepcionSinDatos.class.getSimpleName(), HttpStatus.NOT_FOUND.value());
-		CODIGOS_ESTADO.put(ExcepcionNoEncontrado.class.getSimpleName(), HttpStatus.NOT_FOUND.value());
 		CODIGOS_ESTADO.put(ExcepcionValorObligatorio.class.getSimpleName(), HttpStatus.BAD_REQUEST.value());
 		CODIGOS_ESTADO.put(ExcepcionDuplicidad.class.getSimpleName(), HttpStatus.BAD_REQUEST.value());
 		CODIGOS_ESTADO.put(ExcepcionAccionInvalida.class.getSimpleName(), HttpStatus.BAD_REQUEST.value());
