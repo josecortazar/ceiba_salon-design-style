@@ -35,8 +35,7 @@ public class ConsultaControladorReservaTest {
 	@Test
 	public void obtenerReserva() throws Exception {
 		// arrange act - assert
-		Long id = 1L;
-		mocMvc.perform(get("/reservas/{id}", id).contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
+		mocMvc.perform(get("/reservas/1").contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
 				.andExpect(jsonPath("idCliente", is(1)));
 	}
 }

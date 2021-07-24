@@ -34,14 +34,6 @@ public interface RepositorioCliente {
 	boolean existe(String identificacion);
 
 	/**
-	 * Permite validar si existe un cliente con id
-	 * 
-	 * @param id
-	 * @return si existe o no
-	 */
-	boolean existeId(Long id);
-
-	/**
 	 * Permite validar si existe un cliente con un nombre excluyendo un id
 	 * 
 	 * @param id, nombre
