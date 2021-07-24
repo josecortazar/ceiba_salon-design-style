@@ -6,6 +6,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.time.LocalDateTime;
+
 import com.ceiba.ApplicationMock;
 import com.ceiba.reserva.comando.ComandoReserva;
 import com.ceiba.reserva.servicio.testdatabuilder.ComandoReservaTestDataBuilder;
@@ -45,8 +47,9 @@ public class ComandoControladorReservaTest {
 	@Test
 	public void actualizarReserva() throws Exception {
 		// arrange
-		Long id = 1L;
-		ComandoReserva reserva = new ComandoReservaTestDataBuilder().conId(id).build();
+		Long id = 2L;
+		ComandoReserva reserva = new ComandoReservaTestDataBuilder()
+				.conFechaReserva(LocalDateTime.of(2021, 7, 21, 13, 00)).build();
 
 		// act - assert
 		mocMvc.perform(put("/reservas/{id}", id).contentType(MediaType.APPLICATION_JSON)
@@ -59,8 +62,9 @@ public class ComandoControladorReservaTest {
 		Long id = 2L;
 
 		// act - assert
-		mocMvc.perform(delete("/reservas/{id}", id).contentType(MediaType.APPLICATION_JSON)
-				.accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
+		mocMvc.perform(
+				delete("/reservas/{id}", id).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isOk());
 	}
 
 }

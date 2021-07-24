@@ -3,8 +3,6 @@ package com.ceiba.reserva.servicio.testdatabuilder;
 import java.time.LocalDateTime;
 
 import com.ceiba.cliente.modelo.dto.DtoCliente;
-import com.ceiba.cliente.servicio.testdatabuilder.ClienteTestDataBuilder;
-import com.ceiba.reserva.modelo.entidad.Reserva;
 
 public class DtoClienteTestDataBuilder {
 

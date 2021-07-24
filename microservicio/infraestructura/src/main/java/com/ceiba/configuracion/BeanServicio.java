@@ -69,8 +69,9 @@ public class BeanServicio {
 	 */
 
 	@Bean
-	public ServicioCrearReserva servicioCrearReserva(RepositorioReserva repositorioReserva, DaoCliente daoCliente) {
-		return new ServicioCrearReserva(repositorioReserva, daoCliente);
+	public ServicioCrearReserva servicioCrearReserva(RepositorioReserva repositorioReserva,
+			RepositorioCliente repositorioCliente, DaoCliente daoCliente) {
+		return new ServicioCrearReserva(repositorioReserva, repositorioCliente, daoCliente);
 	}
 
 	@Bean

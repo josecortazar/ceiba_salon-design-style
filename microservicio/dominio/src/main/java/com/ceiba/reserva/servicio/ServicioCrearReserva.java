@@ -1,6 +1,7 @@
 package com.ceiba.reserva.servicio;
 
 import com.ceiba.cliente.puerto.dao.DaoCliente;
+import com.ceiba.cliente.puerto.repositorio.RepositorioCliente;
 import com.ceiba.dominio.excepcion.ExcepcionDuplicidad;
 import com.ceiba.dominio.excepcion.ExcepcionSinDatos;
 
@@ -15,10 +16,14 @@ public class ServicioCrearReserva {
 	private static final String EL_CLIENTE_NO_SE_ENCONTRO_EN_EL_SISTEMA = "El cliente no se encontro en el sistema";
 
 	private final RepositorioReserva repositorioReserva;
+
+	private final RepositorioCliente repositorioCliente;
 	private final DaoCliente daoCliente;
 
-	public ServicioCrearReserva(RepositorioReserva repositorioReserva, DaoCliente daoCliente) {
+	public ServicioCrearReserva(RepositorioReserva repositorioReserva, RepositorioCliente repositorioCliente,
+			DaoCliente daoCliente) {
 		this.repositorioReserva = repositorioReserva;
+		this.repositorioCliente = repositorioCliente;
 		this.daoCliente = daoCliente;
 	}
 
@@ -36,12 +41,11 @@ public class ServicioCrearReserva {
 	}
 
 	private boolean esClienteMenor(Reserva reserva) {
-
-		try {
+		boolean existe = this.repositorioCliente.existeId(reserva.getIdCliente());
+		if (existe) {
 			return validarMenorEdad(daoCliente.obtener(reserva.getIdCliente()).getFechaNacimiento());
-		} catch (Exception e) {
-			throw new ExcepcionSinDatos(EL_CLIENTE_NO_SE_ENCONTRO_EN_EL_SISTEMA);
 		}
+		throw new ExcepcionSinDatos(EL_CLIENTE_NO_SE_ENCONTRO_EN_EL_SISTEMA);
 
 	}
 

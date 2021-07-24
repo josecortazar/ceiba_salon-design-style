@@ -3,7 +3,6 @@ package com.ceiba.reserva.servicio.testdatabuilder;
 import java.time.LocalDateTime;
 
 import com.ceiba.reserva.comando.ComandoReserva;
-import com.ceiba.servicio.comando.ComandoServicio;
 
 public class ComandoReservaTestDataBuilder {
 

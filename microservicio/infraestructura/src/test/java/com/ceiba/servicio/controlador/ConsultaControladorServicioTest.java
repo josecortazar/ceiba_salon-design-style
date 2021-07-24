@@ -29,14 +29,15 @@ public class ConsultaControladorServicioTest {
 	public void listarServicios() throws Exception {
 		// arrange act - assert
 		mocMvc.perform(get("/servicios").contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
-				.andExpect(jsonPath("$", hasSize(1))).andExpect(jsonPath("$[0].nombre", is("Mascarilla Capilar")));
+				.andExpect(jsonPath("$", hasSize(1))).andExpect(jsonPath("$[0].id", is(1)));
 	}
 
 	@Test
 	public void obtenerServicio() throws Exception {
 		// arrange act - assert
-		mocMvc.perform(get("/servicios/1").contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
-				.andExpect(jsonPath("nombre", is("Mascarilla Capilar")));
+		Long id = 1L;
+		mocMvc.perform(get("/servicios/{id}", id).contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
+				.andExpect(jsonPath("id", is(1)));
 	}
 
 }

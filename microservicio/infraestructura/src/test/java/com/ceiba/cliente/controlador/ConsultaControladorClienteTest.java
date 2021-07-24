@@ -35,8 +35,9 @@ public class ConsultaControladorClienteTest {
 	@Test
 	public void obtenerCliente() throws Exception {
 		// arrange act - assert
-		mocMvc.perform(get("/clientes/1094952356").contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
-				.andExpect(jsonPath("nombre", is("Luisa Gomez")));
+		String identificacion = "1094952356";
+		mocMvc.perform(get("/clientes/{identificacion}", identificacion).contentType(MediaType.APPLICATION_JSON))
+				.andExpect(status().isOk()).andExpect(jsonPath("nombre", is("Luisa Gomez")));
 	}
 
 }
