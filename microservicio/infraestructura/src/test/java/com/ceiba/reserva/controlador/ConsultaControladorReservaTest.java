@@ -41,6 +41,6 @@ public class ConsultaControladorReservaTest {
 		// arrange act - assert
 		Long id = 1L;
 		mocMvc.perform(MockMvcRequestBuilders.get("/reservas/{id}", id).accept(MediaType.APPLICATION_JSON))
-				.andExpect(status().isOk()).andExpect(MockMvcResultMatchers.jsonPath("idCliente").value(1));
+				.andExpect(status().isOk()).andExpect(MockMvcResultMatchers.jsonPath("id").value(1));
 	}
 }
