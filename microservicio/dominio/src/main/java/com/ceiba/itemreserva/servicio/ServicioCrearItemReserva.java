@@ -5,7 +5,9 @@ import com.ceiba.dominio.excepcion.ExcepcionSinDatos;
 import com.ceiba.itemreserva.modelo.entidad.ItemReserva;
 import com.ceiba.itemreserva.puerto.repositorio.RepositorioItemReserva;
 import com.ceiba.reserva.puerto.dao.DaoReserva;
+import com.ceiba.reserva.puerto.repositorio.RepositorioReserva;
 import com.ceiba.servicio.puerto.dao.DaoServicio;
+import com.ceiba.servicio.puerto.repositorio.RepositorioServicio;
 
 public class ServicioCrearItemReserva {
 
@@ -14,14 +16,20 @@ public class ServicioCrearItemReserva {
 	private static final String LA_RESERVA_NO_SE_ENCONTRO_EN_EL_SISTEMA = "La reserva no se encontro en el sistema";
 
 	private final RepositorioItemReserva repositorioItemReserva;
+	private final RepositorioReserva repositorioReserva;
 	private final DaoReserva daoReserva;
+	private final RepositorioServicio repositorioServicio;
 	private final DaoServicio daoServicio;
 
-	public ServicioCrearItemReserva(RepositorioItemReserva repositorioItemReserva, DaoReserva daoReserva,
+	public ServicioCrearItemReserva(RepositorioItemReserva repositorioItemReserva,
+			RepositorioReserva repositorioReserva, DaoReserva daoReserva, RepositorioServicio repositorioServicio,
 			DaoServicio daoServicio) {
 		this.repositorioItemReserva = repositorioItemReserva;
+		this.repositorioReserva = repositorioReserva;
 		this.daoReserva = daoReserva;
+		this.repositorioServicio = repositorioServicio;
 		this.daoServicio = daoServicio;
+
 	}
 
 	public Long ejecutar(ItemReserva itemReserva) {
@@ -46,28 +54,28 @@ public class ServicioCrearItemReserva {
 	}
 
 	private void validarReserva(ItemReserva itemReserva) {
-		try {
-			daoReserva.obtener(itemReserva.getIdReserva()).getId();
-		} catch (Exception e) {
+		boolean existe = this.repositorioReserva.existe(itemReserva.getIdReserva());
+		if (!existe) {
 			throw new ExcepcionSinDatos(LA_RESERVA_NO_SE_ENCONTRO_EN_EL_SISTEMA);
 		}
-
 	}
 
 	private String asignarNombre(ItemReserva itemReserva) {
-		try {
+		boolean existe = this.repositorioReserva.existe(itemReserva.getIdServicio());
+		if (existe) {
 			return daoServicio.obtener(itemReserva.getIdServicio()).getNombre();
-		} catch (Exception e) {
-			throw new ExcepcionSinDatos(EL_SERVICIO_NO_SE_ENCONTRO_EN_EL_SISTEMA);
 		}
+		throw new ExcepcionSinDatos(EL_SERVICIO_NO_SE_ENCONTRO_EN_EL_SISTEMA);
+
 	}
 
 	private Double asignarValor(ItemReserva itemReserva) {
-		try {
+		boolean existe = this.repositorioReserva.existe(itemReserva.getIdServicio());
+		if (existe) {
 			return daoServicio.obtener(itemReserva.getIdServicio()).getValor();
-		} catch (Exception e) {
-			throw new ExcepcionSinDatos(EL_SERVICIO_NO_SE_ENCONTRO_EN_EL_SISTEMA);
 		}
+		throw new ExcepcionSinDatos(EL_SERVICIO_NO_SE_ENCONTRO_EN_EL_SISTEMA);
+
 	}
 
 }

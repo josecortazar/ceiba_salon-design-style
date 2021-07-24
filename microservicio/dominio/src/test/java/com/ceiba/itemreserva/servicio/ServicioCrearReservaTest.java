@@ -14,12 +14,16 @@ import com.ceiba.itemreserva.servicio.testdatabuilder.DtoReservaTestDataBuilder;
 import com.ceiba.itemreserva.servicio.testdatabuilder.DtoServicioTestDataBuilder;
 import com.ceiba.itemreserva.servicio.testdatabuilder.ItemReservaTestDataBuilder;
 import com.ceiba.reserva.puerto.dao.DaoReserva;
+import com.ceiba.reserva.puerto.repositorio.RepositorioReserva;
 import com.ceiba.servicio.puerto.dao.DaoServicio;
+import com.ceiba.servicio.puerto.repositorio.RepositorioServicio;
 
 public class ServicioCrearReservaTest {
 
 	private ItemReserva itemReserva;
 	private RepositorioItemReserva repositorioItemReserva;
+	private RepositorioReserva repositorioReserva;
+	private RepositorioServicio repositorioServicio;
 	private DtoReservaTestDataBuilder dtoReservaTestDataBuilder;
 	private DtoServicioTestDataBuilder dtoServicioTestDataBuilder;
 	private DaoReserva daoReserva;
@@ -30,6 +34,8 @@ public class ServicioCrearReservaTest {
 		// arrange
 		itemReserva = new ItemReservaTestDataBuilder().build();
 		repositorioItemReserva = Mockito.mock(RepositorioItemReserva.class);
+		repositorioReserva = Mockito.mock(RepositorioReserva.class);
+		repositorioServicio = Mockito.mock(RepositorioServicio.class);
 
 		dtoReservaTestDataBuilder = new DtoReservaTestDataBuilder();
 		daoReserva = Mockito.mock(DaoReserva.class);
@@ -42,10 +48,12 @@ public class ServicioCrearReservaTest {
 	public void validarItemReservaSinReservaRegistradaEnSistema() {
 		// arrange
 		Mockito.when(repositorioItemReserva.existe(Mockito.anyLong())).thenReturn(false);
+		Mockito.when(repositorioReserva.existe(Mockito.anyLong())).thenReturn(false);
+		Mockito.when(repositorioServicio.existe(Mockito.anyLong())).thenReturn(true);
 		Mockito.when(daoReserva.obtener(Mockito.anyLong())).thenReturn(null);
 
 		ServicioCrearItemReserva servicioCrearItemReserva = new ServicioCrearItemReserva(repositorioItemReserva,
-				daoReserva, daoServicio);
+				repositorioReserva, daoReserva, repositorioServicio, daoServicio);
 		// act - assert
 		BasePrueba.assertThrows(() -> servicioCrearItemReserva.ejecutar(itemReserva), ExcepcionSinDatos.class,
 				"La reserva no se encontro en el sistema");
@@ -55,11 +63,14 @@ public class ServicioCrearReservaTest {
 	public void validarItemReservaSinServicioYConReserva() {
 		// arrange
 		Mockito.when(repositorioItemReserva.existe(Mockito.anyLong())).thenReturn(false);
+		Mockito.when(repositorioReserva.existe(Mockito.anyLong())).thenReturn(true);
+		Mockito.when(repositorioServicio.existe(Mockito.anyLong())).thenReturn(false);
+
 		Mockito.when(daoReserva.obtener(Mockito.anyLong())).thenReturn(dtoReservaTestDataBuilder.build());
 		Mockito.when(daoServicio.obtener(Mockito.anyLong())).thenReturn(null);
 
 		ServicioCrearItemReserva servicioCrearItemReserva = new ServicioCrearItemReserva(repositorioItemReserva,
-				daoReserva, daoServicio);
+				repositorioReserva, daoReserva, repositorioServicio, daoServicio);
 		// act - assert
 		BasePrueba.assertThrows(() -> servicioCrearItemReserva.ejecutar(itemReserva), ExcepcionSinDatos.class,
 				"El servicio no se encontro en el sistema");
@@ -69,11 +80,14 @@ public class ServicioCrearReservaTest {
 	public void validarItemReservaSinReservaYConServicio() {
 		// arrange
 		Mockito.when(repositorioItemReserva.existe(Mockito.anyLong())).thenReturn(false);
+		Mockito.when(repositorioReserva.existe(Mockito.anyLong())).thenReturn(true);
+		Mockito.when(repositorioServicio.existe(Mockito.anyLong())).thenReturn(false);
+
 		Mockito.when(daoReserva.obtener(Mockito.anyLong())).thenReturn(null);
 		Mockito.when(daoServicio.obtener(Mockito.anyLong())).thenReturn(dtoServicioTestDataBuilder.build());
 
 		ServicioCrearItemReserva servicioCrearItemReserva = new ServicioCrearItemReserva(repositorioItemReserva,
-				daoReserva, daoServicio);
+				repositorioReserva, daoReserva, repositorioServicio, daoServicio);
 		// act - assert
 		BasePrueba.assertThrows(() -> servicioCrearItemReserva.ejecutar(itemReserva), ExcepcionSinDatos.class,
 				"La reserva no se encontro en el sistema");
@@ -83,11 +97,14 @@ public class ServicioCrearReservaTest {
 	public void validarItemReservaExistenciaPreviaTest() {
 		// arrange
 		Mockito.when(repositorioItemReserva.existe(Mockito.anyLong())).thenReturn(true);
+		Mockito.when(repositorioReserva.existe(Mockito.anyLong())).thenReturn(true);
+		Mockito.when(repositorioServicio.existe(Mockito.anyLong())).thenReturn(true);
+
 		Mockito.when(daoReserva.obtener(Mockito.anyLong())).thenReturn(dtoReservaTestDataBuilder.build());
 		Mockito.when(daoServicio.obtener(Mockito.anyLong())).thenReturn(dtoServicioTestDataBuilder.build());
 
 		ServicioCrearItemReserva servicioCrearItemReserva = new ServicioCrearItemReserva(repositorioItemReserva,
-				daoReserva, daoServicio);
+				repositorioReserva, daoReserva, repositorioServicio, daoServicio);
 		// act - assert
 		BasePrueba.assertThrows(() -> servicioCrearItemReserva.ejecutar(itemReserva), ExcepcionDuplicidad.class,
 				"El itemReserva ya existe en el sistema");
@@ -97,11 +114,14 @@ public class ServicioCrearReservaTest {
 	public void ejecutarTodoValido() {
 		// arrange
 		Mockito.when(repositorioItemReserva.existe(Mockito.anyLong())).thenReturn(false);
+		Mockito.when(repositorioReserva.existe(Mockito.anyLong())).thenReturn(true);
+		Mockito.when(repositorioServicio.existe(Mockito.anyLong())).thenReturn(true);
+
 		Mockito.when(daoReserva.obtener(Mockito.anyLong())).thenReturn(dtoReservaTestDataBuilder.build());
 		Mockito.when(daoServicio.obtener(Mockito.anyLong())).thenReturn(dtoServicioTestDataBuilder.build());
 
 		ServicioCrearItemReserva servicioCrearItemReserva = new ServicioCrearItemReserva(repositorioItemReserva,
-				daoReserva, daoServicio);
+				repositorioReserva, daoReserva, repositorioServicio, daoServicio);
 
 		// act
 		servicioCrearItemReserva.ejecutar(itemReserva);
