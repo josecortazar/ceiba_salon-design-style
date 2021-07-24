@@ -11,7 +11,7 @@ repositories {
 }
 
 dependencies {
-	//testImplementation project.ext.junit4
+	testImplementation project.ext.junit4
 	testImplementation project.ext.junit5
 	testImplementation project.ext.h2
 	testImplementation project.ext.springboottest
