@@ -16,6 +16,8 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = ApplicationMock.class)
@@ -28,16 +30,18 @@ public class ConsultaControladorServicioTest {
 	@Test
 	public void listarServicios() throws Exception {
 		// arrange act - assert
-		mocMvc.perform(get("/servicios").contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
-				.andExpect(jsonPath("$", hasSize(1))).andExpect(jsonPath("$[0].id", is(1)));
+		mocMvc.perform(MockMvcRequestBuilders.get("/servicios").accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isOk()).andExpect(MockMvcResultMatchers.jsonPath("$[0].id").exists())
+				.andExpect(MockMvcResultMatchers.jsonPath("$[0].id").value(1));
 	}
 
 	@Test
 	public void obtenerServicio() throws Exception {
 		// arrange act - assert
+
 		Long id = 1L;
-		mocMvc.perform(get("/servicios/{id}", id).contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
-				.andExpect(jsonPath("id", is(1)));
+		mocMvc.perform(MockMvcRequestBuilders.get("/servicios/{id}", id).accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isOk()).andExpect(MockMvcResultMatchers.jsonPath("id").value(1));
 	}
 
 }
