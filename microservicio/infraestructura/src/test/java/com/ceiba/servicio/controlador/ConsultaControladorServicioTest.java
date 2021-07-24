@@ -37,7 +37,7 @@ public class ConsultaControladorServicioTest {
 		// arrange act - assert
 		Long id = 1L;
 		mocMvc.perform(get("/servicios/{id}", id).contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
-				.andExpect(jsonPath("id", is(1)));
+				.andExpect(jsonPath("id", is(id)));
 	}
 
 }
