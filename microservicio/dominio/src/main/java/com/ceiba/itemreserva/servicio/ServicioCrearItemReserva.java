@@ -61,7 +61,7 @@ public class ServicioCrearItemReserva {
 	}
 
 	private String asignarNombre(ItemReserva itemReserva) {
-		boolean existe = this.repositorioReserva.existe(itemReserva.getIdServicio());
+		boolean existe = this.repositorioServicio.existe(itemReserva.getIdServicio());
 		if (existe) {
 			return daoServicio.obtener(itemReserva.getIdServicio()).getNombre();
 		}
@@ -70,7 +70,7 @@ public class ServicioCrearItemReserva {
 	}
 
 	private Double asignarValor(ItemReserva itemReserva) {
-		boolean existe = this.repositorioReserva.existe(itemReserva.getIdServicio());
+		boolean existe = this.repositorioServicio.existe(itemReserva.getIdServicio());
 		if (existe) {
 			return daoServicio.obtener(itemReserva.getIdServicio()).getValor();
 		}

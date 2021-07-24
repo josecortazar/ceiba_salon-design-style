@@ -18,7 +18,7 @@ import com.ceiba.reserva.puerto.repositorio.RepositorioReserva;
 import com.ceiba.servicio.puerto.dao.DaoServicio;
 import com.ceiba.servicio.puerto.repositorio.RepositorioServicio;
 
-public class ServicioCrearReservaTest {
+public class ServicioCrearItemReservaTest {
 
 	private ItemReserva itemReserva;
 	private RepositorioItemReserva repositorioItemReserva;
@@ -80,8 +80,8 @@ public class ServicioCrearReservaTest {
 	public void validarItemReservaSinReservaYConServicio() {
 		// arrange
 		Mockito.when(repositorioItemReserva.existe(Mockito.anyLong())).thenReturn(false);
-		Mockito.when(repositorioReserva.existe(Mockito.anyLong())).thenReturn(true);
-		Mockito.when(repositorioServicio.existe(Mockito.anyLong())).thenReturn(false);
+		Mockito.when(repositorioReserva.existe(Mockito.anyLong())).thenReturn(false);
+		Mockito.when(repositorioServicio.existe(Mockito.anyLong())).thenReturn(true);
 
 		Mockito.when(daoReserva.obtener(Mockito.anyLong())).thenReturn(null);
 		Mockito.when(daoServicio.obtener(Mockito.anyLong())).thenReturn(dtoServicioTestDataBuilder.build());
