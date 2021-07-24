@@ -1,9 +1,5 @@
 package com.ceiba.servicio.controlador;
 
-import static org.hamcrest.Matchers.hasSize;
-import static org.hamcrest.core.Is.is;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.ceiba.ApplicationMock;
@@ -32,7 +28,7 @@ public class ConsultaControladorServicioTest {
 		// arrange act - assert
 		mocMvc.perform(MockMvcRequestBuilders.get("/servicios").accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk()).andExpect(MockMvcResultMatchers.jsonPath("$[0].id").exists())
-				.andExpect(MockMvcResultMatchers.jsonPath("$[0].id").value(1));
+				.andExpect(MockMvcResultMatchers.jsonPath("$[0].nombre").value("Mascarilla Capilar"));
 	}
 
 	@Test
@@ -41,7 +37,8 @@ public class ConsultaControladorServicioTest {
 
 		Long id = 1L;
 		mocMvc.perform(MockMvcRequestBuilders.get("/servicios/{id}", id).accept(MediaType.APPLICATION_JSON))
-				.andExpect(status().isOk()).andExpect(MockMvcResultMatchers.jsonPath("id").value(1));
+				.andExpect(status().isOk())
+				.andExpect(MockMvcResultMatchers.jsonPath("nombre").value("Mascarilla Capilar"));
 	}
 
 }
