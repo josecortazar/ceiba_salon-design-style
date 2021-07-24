@@ -17,26 +17,26 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
-@RunWith(SpringRunner.class)
-@ContextConfiguration(classes = ApplicationMock.class)
-@WebMvcTest(ConsultaControladorServicio.class)
+//@RunWith(SpringRunner.class)
+//@ContextConfiguration(classes = ApplicationMock.class)
+//@WebMvcTest(ConsultaControladorServicio.class)
 public class ConsultaControladorServicioTest {
 
-	@Autowired
-	private MockMvc mocMvc;
-
-	@Test
-	public void listarServicios() throws Exception {
-		// arrange act - assert
-		mocMvc.perform(get("/servicios").contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
-				.andExpect(jsonPath("$", hasSize(1))).andExpect(jsonPath("$[0].nombre", is("Mascarilla Capilar")));
-	}
-
-	@Test
-	public void obtenerServicio() throws Exception {
-		// arrange act - assert
-		mocMvc.perform(get("/servicios/1").contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
-				.andExpect(jsonPath("nombre", is("Mascarilla Capilar")));
-	}
+//	@Autowired
+//	private MockMvc mocMvc;
+//
+//	@Test
+//	public void listarServicios() throws Exception {
+//		// arrange act - assert
+//		mocMvc.perform(get("/servicios").contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
+//				.andExpect(jsonPath("$", hasSize(1))).andExpect(jsonPath("$[0].nombre", is("Mascarilla Capilar")));
+//	}
+//
+//	@Test
+//	public void obtenerServicio() throws Exception {
+//		// arrange act - assert
+//		mocMvc.perform(get("/servicios/1").contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
+//				.andExpect(jsonPath("nombre", is("Mascarilla Capilar")));
+//	}
 
 }
