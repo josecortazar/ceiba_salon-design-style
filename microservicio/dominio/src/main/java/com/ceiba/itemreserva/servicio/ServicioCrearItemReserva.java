@@ -17,16 +17,13 @@ public class ServicioCrearItemReserva {
 
 	private final RepositorioItemReserva repositorioItemReserva;
 	private final RepositorioReserva repositorioReserva;
-	private final DaoReserva daoReserva;
 	private final RepositorioServicio repositorioServicio;
 	private final DaoServicio daoServicio;
 
 	public ServicioCrearItemReserva(RepositorioItemReserva repositorioItemReserva,
-			RepositorioReserva repositorioReserva, DaoReserva daoReserva, RepositorioServicio repositorioServicio,
-			DaoServicio daoServicio) {
+			RepositorioReserva repositorioReserva, RepositorioServicio repositorioServicio, DaoServicio daoServicio) {
 		this.repositorioItemReserva = repositorioItemReserva;
 		this.repositorioReserva = repositorioReserva;
-		this.daoReserva = daoReserva;
 		this.repositorioServicio = repositorioServicio;
 		this.daoServicio = daoServicio;
 

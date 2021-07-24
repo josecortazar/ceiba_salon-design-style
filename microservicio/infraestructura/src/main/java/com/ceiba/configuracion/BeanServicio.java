@@ -90,9 +90,8 @@ public class BeanServicio {
 
 	@Bean
 	public ServicioCrearItemReserva servicioCrearItemReserva(RepositorioItemReserva repositorioItemReserva,
-			RepositorioReserva repositorioReserva, DaoReserva daoReserva, RepositorioServicio repositorioServicio,
-			DaoServicio daoServicio) {
-		return new ServicioCrearItemReserva(repositorioItemReserva, repositorioReserva, daoReserva, repositorioServicio,
+			RepositorioReserva repositorioReserva, RepositorioServicio repositorioServicio, DaoServicio daoServicio) {
+		return new ServicioCrearItemReserva(repositorioItemReserva, repositorioReserva, repositorioServicio,
 				daoServicio);
 	}
 
