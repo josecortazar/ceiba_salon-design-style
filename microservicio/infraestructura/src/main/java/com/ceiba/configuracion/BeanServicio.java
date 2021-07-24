@@ -9,7 +9,6 @@ import com.ceiba.itemreserva.puerto.repositorio.RepositorioItemReserva;
 import com.ceiba.itemreserva.servicio.ServicioActualizarItemReserva;
 import com.ceiba.itemreserva.servicio.ServicioCrearItemReserva;
 import com.ceiba.itemreserva.servicio.ServicioEliminarItemReserva;
-import com.ceiba.reserva.puerto.dao.DaoReserva;
 import com.ceiba.reserva.puerto.repositorio.RepositorioReserva;
 import com.ceiba.reserva.servicio.ServicioActualizarReserva;
 import com.ceiba.reserva.servicio.ServicioCrearReserva;
