@@ -14,7 +14,7 @@ import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping("/itemreservas")
-@Api(tags = { "Controlador comando reservas" })
+@Api(tags = { "Controlador comando ItemReserva" })
 public class ComandoControladorItemReserva {
 
 	private final ManejadorCrearItemReserva manejadorCrearItemReserva;
@@ -32,19 +32,19 @@ public class ComandoControladorItemReserva {
 	}
 
 	@PostMapping
-	@ApiOperation("Crear Item reserva")
+	@ApiOperation("Crear Item ItemReserva")
 	public ComandoRespuesta<Long> crear(@RequestBody ComandoItemReserva comandoItemReserva) {
 		return manejadorCrearItemReserva.ejecutar(comandoItemReserva);
 	}
 
 	@DeleteMapping(value = "/{id}")
-	@ApiOperation("Eliminar Item reserva")
+	@ApiOperation("Eliminar Item ItemReserva")
 	public void eliminar(@PathVariable Long id) {
 		manejadorEliminarItemReserva.ejecutar(id);
 	}
 
 	@PutMapping(value = "/{id}")
-	@ApiOperation("Actualizar Item reserva")
+	@ApiOperation("Actualizar Item ItemReserva")
 	public void actualizar(@RequestBody ComandoItemReserva comandoItemReserva, @PathVariable Long id) {
 		comandoItemReserva.setId(id);
 		manejadorActualizarItemReserva.ejecutar(comandoItemReserva);

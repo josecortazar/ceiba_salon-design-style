@@ -39,4 +39,13 @@ public class ConsultaControladorReservaTest {
 		mocMvc.perform(MockMvcRequestBuilders.get("/itemreservas/{id}", id).accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk()).andExpect(MockMvcResultMatchers.jsonPath("id").value(1));
 	}
+	
+	@Test
+	public void listarItemDeUnaReserva() throws Exception {
+		// arrange act - assert
+		Long id = 1L;
+		mocMvc.perform(MockMvcRequestBuilders.get("/itemreservas/reserva/{id}", id).accept(MediaType.APPLICATION_JSON))
+		.andExpect(status().isOk()).andExpect(MockMvcResultMatchers.jsonPath("$[0].idReserva").exists())
+		.andExpect(MockMvcResultMatchers.jsonPath("$[0].idReserva").value(1));
+	}
 }

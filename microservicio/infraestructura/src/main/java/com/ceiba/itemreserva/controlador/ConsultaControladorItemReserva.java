@@ -3,6 +3,7 @@ package com.ceiba.itemreserva.controlador;
 import java.util.List;
 
 import com.ceiba.itemreserva.consulta.ManejadorListarItemReservas;
+import com.ceiba.itemreserva.consulta.ManejadorListarItemReservasPorReserva;
 import com.ceiba.itemreserva.consulta.ManejadorObtenerItemReserva;
 import com.ceiba.itemreserva.modelo.dto.DtoItemReserva;
 
@@ -16,16 +17,19 @@ import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping("/itemreservas")
-@Api(tags = { "Controlador consulta Reserva" })
+@Api(tags = { "Controlador consulta ItemReserva" })
 public class ConsultaControladorItemReserva {
 
 	private final ManejadorListarItemReservas manejadorListarItemReservas;
 	private final ManejadorObtenerItemReserva manejadorObtenerItemReserva;
+	private final ManejadorListarItemReservasPorReserva manejadorListarItemReservasPorReserva;
 
 	public ConsultaControladorItemReserva(ManejadorListarItemReservas manejadorListarItemReservas,
-			ManejadorObtenerItemReserva manejadorObtenerItemReserva) {
+			ManejadorObtenerItemReserva manejadorObtenerItemReserva,
+			ManejadorListarItemReservasPorReserva manejadorListarItemReservasPorReserva) {
 		this.manejadorListarItemReservas = manejadorListarItemReservas;
 		this.manejadorObtenerItemReserva = manejadorObtenerItemReserva;
+		this.manejadorListarItemReservasPorReserva = manejadorListarItemReservasPorReserva;
 	}
 
 	@GetMapping
@@ -35,9 +39,15 @@ public class ConsultaControladorItemReserva {
 	}
 
 	@GetMapping(value = "/{id}")
-	@ApiOperation("Obtener Reserva")
+	@ApiOperation("Obtener ItemReserva")
 	public DtoItemReserva obtener(@PathVariable Long id) {
 		return this.manejadorObtenerItemReserva.ejecutar(id);
+	}
+
+	@GetMapping(value = "/reserva/{id}")
+	@ApiOperation("Listar los Item de una reserva")
+	public List<DtoItemReserva> listarPorReserva(@PathVariable Long id) {
+		return this.manejadorListarItemReservasPorReserva.ejecutar(id);
 	}
 
 }
