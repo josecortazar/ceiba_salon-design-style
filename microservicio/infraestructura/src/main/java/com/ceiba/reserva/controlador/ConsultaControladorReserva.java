@@ -3,6 +3,7 @@ package com.ceiba.reserva.controlador;
 import java.util.List;
 
 import com.ceiba.reserva.consulta.ManejadorListarReservas;
+import com.ceiba.reserva.consulta.ManejadorListarReservasPorCliente;
 import com.ceiba.reserva.consulta.ManejadorObtenerReserva;
 import com.ceiba.reserva.modelo.dto.DtoReserva;
 
@@ -21,11 +22,14 @@ public class ConsultaControladorReserva {
 
 	private final ManejadorListarReservas manejadorListarReservas;
 	private final ManejadorObtenerReserva manejadorObtenerReserva;
+	private final ManejadorListarReservasPorCliente manejadorListarReservaPorCliente;
 
 	public ConsultaControladorReserva(ManejadorListarReservas manejadorListarReservas,
-			ManejadorObtenerReserva manejadorObtenerReserva) {
+			ManejadorObtenerReserva manejadorObtenerReserva,
+			ManejadorListarReservasPorCliente manejadorListarReservaPorCliente) {
 		this.manejadorListarReservas = manejadorListarReservas;
 		this.manejadorObtenerReserva = manejadorObtenerReserva;
+		this.manejadorListarReservaPorCliente = manejadorListarReservaPorCliente;
 	}
 
 	@GetMapping
@@ -38,6 +42,12 @@ public class ConsultaControladorReserva {
 	@ApiOperation("Obtener Reserva")
 	public DtoReserva obtener(@PathVariable Long id) {
 		return this.manejadorObtenerReserva.ejecutar(id);
+	}
+
+	@GetMapping(value = "/cliente/{id}")
+	@ApiOperation("Listar las reservas de un cliente")
+	public List<DtoReserva> listarPorCliente(@PathVariable Long id) {
+		return this.manejadorListarReservaPorCliente.ejecutar(id);
 	}
 
 }

@@ -21,6 +21,9 @@ public class DaoReservaMysql implements DaoReserva {
 	@SqlStatement(namespace = "reserva", value = "obtener")
 	private static String sqlObtener;
 
+	@SqlStatement(namespace = "reserva", value = "listarporcliente")
+	private static String sqlListarPorCliente;
+
 	public DaoReservaMysql(CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate) {
 		this.customNamedParameterJdbcTemplate = customNamedParameterJdbcTemplate;
 	}
@@ -37,6 +40,14 @@ public class DaoReservaMysql implements DaoReserva {
 		parametro.addValue("id", id);
 		return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate()
 				.query(sqlObtener, parametro, new MapeoReserva()).iterator().next();
+	}
+
+	@Override
+	public List<DtoReserva> listarPorCliente(Long id) {
+		MapSqlParameterSource parametro = new MapSqlParameterSource();
+		parametro.addValue("idCliente", id);
+		return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().query(sqlListarPorCliente,
+				parametro, new MapeoReserva());
 	}
 
 }
