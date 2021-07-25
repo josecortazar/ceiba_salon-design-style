@@ -43,8 +43,8 @@ public class ConsultaControladorReservaTest {
 	@Test
 	public void listarItemDeUnaReserva() throws Exception {
 		// arrange act - assert
-		Long id = 1L;
-		mocMvc.perform(MockMvcRequestBuilders.get("/reservas/cliente/{id}", id).accept(MediaType.APPLICATION_JSON))
+		String identificacion = "1094952356";
+		mocMvc.perform(MockMvcRequestBuilders.get("/reservas/cliente/{identificacion}", identificacion).accept(MediaType.APPLICATION_JSON))
 		.andExpect(status().isOk()).andExpect(MockMvcResultMatchers.jsonPath("$[0].idCliente").exists())
 		.andExpect(MockMvcResultMatchers.jsonPath("$[0].idCliente").value(1));
 	}
