@@ -16,7 +16,7 @@ public class ManejadorListarReservasPorCliente {
 		this.daoReserva = daoReserva;
 	}
 
-	public List<DtoReserva> ejecutar(Long id) {
-		return this.daoReserva.listarPorCliente(id);
+	public List<DtoReserva> ejecutar(String identificacion) {
+		return this.daoReserva.listarPorCliente(identificacion);
 	}
 }

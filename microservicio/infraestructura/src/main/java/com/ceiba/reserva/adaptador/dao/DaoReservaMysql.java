@@ -43,9 +43,9 @@ public class DaoReservaMysql implements DaoReserva {
 	}
 
 	@Override
-	public List<DtoReserva> listarPorCliente(Long id) {
+	public List<DtoReserva> listarPorCliente(String identificacion) {
 		MapSqlParameterSource parametro = new MapSqlParameterSource();
-		parametro.addValue("idCliente", id);
+		parametro.addValue("identificacion", identificacion);
 		return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().query(sqlListarPorCliente,
 				parametro, new MapeoReserva());
 	}

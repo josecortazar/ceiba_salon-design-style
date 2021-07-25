@@ -44,10 +44,10 @@ public class ConsultaControladorReserva {
 		return this.manejadorObtenerReserva.ejecutar(id);
 	}
 
-	@GetMapping(value = "/cliente/{id}")
+	@GetMapping(value = "/cliente/{identificacion}")
 	@ApiOperation("Listar las reservas de un cliente")
-	public List<DtoReserva> listarPorCliente(@PathVariable Long id) {
-		return this.manejadorListarReservaPorCliente.ejecutar(id);
+	public List<DtoReserva> listarPorCliente(@PathVariable String identificacion) {
+		return this.manejadorListarReservaPorCliente.ejecutar(identificacion);
 	}
 
 }

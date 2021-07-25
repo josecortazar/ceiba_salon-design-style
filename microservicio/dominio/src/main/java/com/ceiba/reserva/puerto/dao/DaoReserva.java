@@ -25,6 +25,6 @@ public interface DaoReserva {
 	 * 
 	 * @return Lista de DTOs de reservas
 	 */
-	List<DtoReserva> listarPorCliente(Long id);
+	List<DtoReserva> listarPorCliente(String identificacion);
 	
 }
