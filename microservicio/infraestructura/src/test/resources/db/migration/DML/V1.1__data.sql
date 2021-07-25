@@ -6,3 +6,6 @@ VALUES ('Mascarilla Capilar', 'Mascarilla Capilar Mascarilla Capilar', '35000','
 
 INSERT INTO reserva (idcliente, fechacreacion, fechareserva, preciototal, precioneto, cantidadservicios, esreservademenor)
 VALUES ('1', '2021-09-02 12:05:50','2021-09-03 11:05:50', '35000', '35000', '1', '0');
+
+INSERT INTO itemreserva ( idreserva, idservicio, nombre, valor)
+VALUES ('1', '1', 'Masaje Capilar', '60000');
