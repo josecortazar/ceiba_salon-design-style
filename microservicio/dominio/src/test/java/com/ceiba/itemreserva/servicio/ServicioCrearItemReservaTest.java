@@ -24,7 +24,6 @@ public class ServicioCrearItemReservaTest {
 	private RepositorioItemReserva repositorioItemReserva;
 	private RepositorioReserva repositorioReserva;
 	private RepositorioServicio repositorioServicio;
-	private DtoReservaTestDataBuilder dtoReservaTestDataBuilder;
 	private DtoServicioTestDataBuilder dtoServicioTestDataBuilder;
 	private DaoServicio daoServicio;
 
@@ -35,8 +34,6 @@ public class ServicioCrearItemReservaTest {
 		repositorioItemReserva = Mockito.mock(RepositorioItemReserva.class);
 		repositorioReserva = Mockito.mock(RepositorioReserva.class);
 		repositorioServicio = Mockito.mock(RepositorioServicio.class);
-
-		dtoReservaTestDataBuilder = new DtoReservaTestDataBuilder();
 
 		dtoServicioTestDataBuilder = new DtoServicioTestDataBuilder();
 		daoServicio = Mockito.mock(DaoServicio.class);
