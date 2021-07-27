@@ -3,4 +3,4 @@
 -- -----------------------------------------------------
 
 INSERT INTO reserva ( idcliente, fechacreacion, fechareserva, preciototal, precioneto, cantidadservicios, esreservademenor)
-VALUES ( :idCliente, :fechaCreacion, :fechaReserva, :precioTotal, :precioNeto, :cantidadServicios, :esReservaDeMenor)
+VALUES ( :idCliente, :fechaCreacion, :fechaReserva, :modificacadorPrecio, :precioNeto, :cantidadServicios, :esReservaDeMenor)

@@ -49,7 +49,7 @@ public class Reserva {
 	private LocalDateTime fechaCreacion;
 	private LocalDateTime fechaReserva;
 	private Double precioNeto;
-	private Double precioTotal;
+	private Double modificacadorPrecio;
 	private Long cantidadServicios;
 	private Boolean esReservaDeMenor;
 
@@ -92,7 +92,7 @@ public class Reserva {
 		this.fechaCreacion = fechaCreacion;
 		this.fechaReserva = fechaReserva;
 		this.precioNeto = precioNeto;
-		this.precioTotal = precioNeto * alteracionPrecio;
+		this.modificacadorPrecio = alteracionPrecio;
 		this.cantidadServicios = cantidadServicios;
 		this.esReservaDeMenor = esReservaDeMenor;
 	}

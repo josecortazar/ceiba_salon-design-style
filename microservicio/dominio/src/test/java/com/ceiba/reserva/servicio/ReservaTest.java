@@ -91,7 +91,7 @@ public class ReservaTest {
 		Reserva reserva = reservaTestDataBuilder.build();
 
 		// act - assert
-		assertThat(reserva.getPrecioTotal(), CoreMatchers.is(reserva.getPrecioNeto() * 1.1));
+		assertThat(reserva.getModificacadorPrecio(), CoreMatchers.is(1.1));
 	}
 
 	@Test
@@ -104,7 +104,7 @@ public class ReservaTest {
 		Reserva reserva = reservaTestDataBuilder.build();
 
 		// act - assert
-		assertThat(reserva.getPrecioTotal(), CoreMatchers.is(reserva.getPrecioNeto() * 1.15));
+		assertThat(reserva.getModificacadorPrecio(), CoreMatchers.is(1.15));
 	}
 
 	@Test
@@ -115,7 +115,7 @@ public class ReservaTest {
 		Reserva reserva = reservaTestDataBuilder.build();
 
 		// act - assert
-		assertThat(reserva.getPrecioTotal(), CoreMatchers.is(reserva.getPrecioNeto() * 0.9));
+		assertThat(reserva.getModificacadorPrecio(), CoreMatchers.is( 0.9));
 	}
 
 	@Test
@@ -128,7 +128,7 @@ public class ReservaTest {
 		Reserva reserva = reservaTestDataBuilder.build();
 
 		// act - assert
-		assertThat(reserva.getPrecioTotal(), CoreMatchers.is(reserva.getPrecioNeto() * ((1.0 + 0.15) - 0.1)));
+		assertThat(reserva.getModificacadorPrecio(), CoreMatchers.is((1.0 + 0.15) - 0.1));
 	}
 
 	@Test
@@ -141,7 +141,7 @@ public class ReservaTest {
 		Reserva reserva = reservaTestDataBuilder.build();
 
 		// act - assert
-		assertThat(reserva.getPrecioTotal(), CoreMatchers.is(reserva.getPrecioNeto() * ((1.0 + 0.1) - 0.1)));
+		assertThat(reserva.getModificacadorPrecio(), CoreMatchers.is((1.0 + 0.1) - 0.1));
 	}
 
 }
