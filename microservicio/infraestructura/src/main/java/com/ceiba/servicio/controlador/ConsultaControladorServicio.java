@@ -6,6 +6,7 @@ import com.ceiba.servicio.consulta.ManejadorListarServicios;
 import com.ceiba.servicio.consulta.ManejadorObtenerServicio;
 import com.ceiba.servicio.modelo.dto.DtoServicio;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/servicios")
 @Api(tags = { "Controlador consulta Servicio" })

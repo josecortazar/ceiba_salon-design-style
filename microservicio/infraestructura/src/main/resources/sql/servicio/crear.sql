@@ -2,5 +2,5 @@
 -- Table servicio
 -- -----------------------------------------------------
 
-INSERT INTO servicio (idservicio, nombre, descripcion, valor, imagen)
-VALUES (:id, :nombre, :descripcion, :valor, :imagen)
+INSERT INTO servicio ( nombre, descripcion, valor, imagen)
+VALUES ( :nombre, :descripcion, :valor, :imagen)
