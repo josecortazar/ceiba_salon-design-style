@@ -6,6 +6,7 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
@@ -20,11 +21,16 @@ public class FiltroHeaderSeguridad implements Filter {
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
+		HttpServletRequest httpServletRequest = (HttpServletRequest) request;
 		HttpServletResponse httpServletResponse = (HttpServletResponse) response;
+
 		httpServletResponse.setHeader(X_XSS_PROTECTION, "1; mode=block");
 		httpServletResponse.setHeader(X_CONTENT_TYPE_OPTIONS, "nosniff");
 		httpServletResponse.setHeader(PRAGMA, "no-cache");
 		httpServletResponse.setHeader(X_FRAME_OPTIONS, "SAMEORIGIN");
+		httpServletResponse.addHeader("Access-Control-Allow-Origin", httpServletRequest.getHeader("Origin"));
+		httpServletResponse.addHeader("Access-Control-Allow-Headers", "*");
+
 		chain.doFilter(request, response);
 	}
 }

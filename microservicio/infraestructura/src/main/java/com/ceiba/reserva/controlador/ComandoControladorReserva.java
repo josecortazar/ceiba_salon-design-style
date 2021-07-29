@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
-@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/reservas")
 @Api(tags = { "Controlador comando reservas" })
