@@ -11,11 +11,6 @@ CREATE TABLE IF NOT EXISTS cliente (
   PRIMARY KEY (idcliente)
   );
   
----INSERT INTO cliente (nombre, identificacion, correoelectronico, numtelefono, fechanacimiento)
----VALUES ('Sara Gomez', '1092006352', 'sarag@gmail.com', '3110515120', '1979-09-20 20:05:50');
-
----INSERT INTO cliente (nombre, identificacion,  correoelectronico, numtelefono, fechanacimiento)
----VALUES ('Laura Torres', '1093012327',  'luato@hotmail.com', '3205815133', '1996-02-20 0:05:50');
 
 -- -----------------------------------------------------
 -- Table reserva
@@ -30,7 +25,7 @@ CREATE TABLE IF NOT EXISTS reserva (
   cantidadservicios INT NOT NULL,
   esreservademenor TINYINT NOT NULL,
   PRIMARY KEY (idreserva),
-  FOREIGN KEY (idcliente) REFERENCES cliente (idcliente)
+  FOREIGN KEY (idcliente) REFERENCES cliente (idcliente) ON DELETE CASCADE
 );
 
 
@@ -57,6 +52,6 @@ CREATE TABLE IF NOT EXISTS itemreserva (
   nombre VARCHAR(50) NOT NULL,
   valor DOUBLE NOT NULL,
   PRIMARY KEY (iditemreserva),
-  FOREIGN KEY (idreserva) REFERENCES reserva (idreserva),
+  FOREIGN KEY (idreserva) REFERENCES reserva (idreserva) ON DELETE CASCADE,
   FOREIGN KEY (idservicio) REFERENCES servicio (idservicio)
 );

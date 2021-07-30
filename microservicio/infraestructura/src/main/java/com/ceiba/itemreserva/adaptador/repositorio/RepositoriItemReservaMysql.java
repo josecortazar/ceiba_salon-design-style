@@ -14,12 +14,19 @@ public class RepositoriItemReservaMysql implements RepositorioItemReserva {
 	private final CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate;
 
 	private static final String CAMPO_ID_ITEM_RESERVA = "id";
+	private static final String CAMPO_ID_RESERVA = "idReserva";
 
 	@SqlStatement(namespace = "itemreserva", value = "crear")
 	private static String sqlCrear;
 
 	@SqlStatement(namespace = "itemreserva", value = "actualizar")
 	private static String sqlActualizar;
+	
+	@SqlStatement(namespace = "itemreserva", value = "actualizarcantidad")
+	private static String sqlActualizarCantidad;
+	
+	@SqlStatement(namespace = "itemreserva", value = "actualizartotal")
+	private static String sqlActualizarTotal;
 
 	@SqlStatement(namespace = "itemreserva", value = "eliminar")
 	private static String sqlEliminar;
@@ -33,7 +40,17 @@ public class RepositoriItemReservaMysql implements RepositorioItemReserva {
 
 	@Override
 	public Long crear(ItemReserva itemReserva) {
-		return this.customNamedParameterJdbcTemplate.crear(itemReserva, sqlCrear);
+		
+		Long respuesta =  this.customNamedParameterJdbcTemplate.crear(itemReserva, sqlCrear);
+		
+		MapSqlParameterSource paramSource = new MapSqlParameterSource();
+		paramSource.addValue(CAMPO_ID_RESERVA, itemReserva.getIdReserva());
+		
+		this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().update(sqlActualizarCantidad, paramSource);
+		this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().update(sqlActualizarTotal, paramSource);
+				
+		return respuesta;
+		
 	}
 
 	@Override
