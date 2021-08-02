@@ -25,9 +25,6 @@ public class RepositoriItemReservaMysql implements RepositorioItemReserva {
 	@SqlStatement(namespace = "itemreserva", value = "actualizarcantidad")
 	private static String sqlActualizarCantidad;
 	
-	@SqlStatement(namespace = "itemreserva", value = "actualizartotal")
-	private static String sqlActualizarTotal;
-
 	@SqlStatement(namespace = "itemreserva", value = "eliminar")
 	private static String sqlEliminar;
 
@@ -47,7 +44,6 @@ public class RepositoriItemReservaMysql implements RepositorioItemReserva {
 		paramSource.addValue(CAMPO_ID_RESERVA, itemReserva.getIdReserva());
 		
 		this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().update(sqlActualizarCantidad, paramSource);
-		this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().update(sqlActualizarTotal, paramSource);
 				
 		return respuesta;
 		
